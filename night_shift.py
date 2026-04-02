@@ -2,7 +2,12 @@
 Night Shift Article Pipeline — Orchestrator
 ============================================
 Runs nightly. Pulls keywords from queue. Orchestrates Writer, Editor,
-and SEO agents through Qwen 3.5-122B inference.
+and SEO agents via dual LLM routing.
+
+MODEL ROUTING:
+  Writer  → Qwen3.5-35B-A3B  (10.0.0.13:8000) — creative generation, faster
+  Editor  → Qwen3.5-122B     (10.0.0.13:8000) — high-fidelity quality review
+  SEO     → Qwen3.5-122B     (10.0.0.13:8000) — high-fidelity SEO analysis
 
 CONSENSUS RULE: Both Editor AND SEO must output "APPROVE".
 If either rejects, their combined revision notes go back to the Writer.
@@ -19,8 +24,15 @@ from pathlib import Path
 
 MAX_REVISIONS = 3
 ARTICLES_PER_NIGHT = 5
-VLLM_ENDPOINT = "http://10.0.0.13:8000/v1/chat/completions"
-VLLM_MODEL = "Qwen/Qwen3.5-122B-Instruct"
+
+# ── Model routing ─────────────────────────────────────────────────────────────
+# Writer uses the faster 35B model (drafting is creative, less reasoning load).
+# Editor and SEO use the full 122B model (review requires deeper reasoning).
+VLLM_BASE_URL = "http://10.0.0.13:8000/v1/chat/completions"
+
+WRITER_MODEL  = "Qwen/Qwen3.5-35B-A3B"    # Fast — creative generation
+EDITOR_MODEL  = "Qwen/Qwen3.5-122B"        # Full power — quality review
+SEO_MODEL     = "Qwen/Qwen3.5-122B"        # Full power — SEO analysis
 
 REPO_PATH = Path.home() / "site-repo"
 QUEUE_FILE = REPO_PATH / "keyword-queue.md"
@@ -54,16 +66,23 @@ def load_system_prompts() -> dict:
 
 # ─── LLM call ─────────────────────────────────────────────────────────────────
 
-def call_qwen(system_prompt: str, user_message: str, temperature: float = 0.7) -> str:
+def call_llm(
+    system_prompt: str,
+    user_message: str,
+    model: str,
+    temperature: float = 0.7,
+) -> str:
     """
-    Call local Qwen 3.5-122B via vLLM OpenAI-compatible endpoint.
-    Writer uses temperature 0.7 (creative).
-    Editor and SEO use temperature 0.3 (consistent evaluation).
+    Call the local vLLM endpoint with the specified model.
+
+    Temperature guide:
+      0.7 → Writer (creative generation)
+      0.3 → Editor / SEO (consistent, reproducible evaluation)
     """
     import requests
 
     request_payload = {
-        "model": VLLM_MODEL,
+        "model": model,
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_message},
@@ -72,7 +91,7 @@ def call_qwen(system_prompt: str, user_message: str, temperature: float = 0.7) -
         "temperature": temperature,
     }
 
-    api_response = requests.post(VLLM_ENDPOINT, json=request_payload, timeout=300)
+    api_response = requests.post(VLLM_BASE_URL, json=request_payload, timeout=300)
     api_response.raise_for_status()
 
     return api_response.json()["choices"][0]["message"]["content"]
@@ -189,7 +208,7 @@ Return ONLY the complete article in markdown with YAML front matter.
 No preamble, no commentary, no explanations — just the article.
 """
 
-    return call_qwen(writer_system_prompt, user_message, temperature=0.7)
+    return call_llm(writer_system_prompt, user_message, model=WRITER_MODEL, temperature=0.7)
 
 
 # ─── Editor Agent ──────────────────────────────────────────────────────────────
@@ -217,7 +236,7 @@ Provide your review in the JSON format specified in your instructions.
 Return ONLY valid JSON — no markdown, no explanation, just the JSON object.
 """
 
-    raw_response = call_qwen(editor_system_prompt, user_message, temperature=0.3)
+    raw_response = call_llm(editor_system_prompt, user_message, model=EDITOR_MODEL, temperature=0.3)
     return parse_json_from_llm_response(raw_response)
 
 
@@ -246,7 +265,7 @@ Provide your review in the JSON format specified in your instructions.
 Return ONLY valid JSON — no markdown, no explanation, just the JSON object.
 """
 
-    raw_response = call_qwen(seo_system_prompt, user_message, temperature=0.3)
+    raw_response = call_llm(seo_system_prompt, user_message, model=SEO_MODEL, temperature=0.3)
     return parse_json_from_llm_response(raw_response)
 
 
