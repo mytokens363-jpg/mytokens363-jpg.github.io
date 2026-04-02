@@ -22,3 +22,7 @@ STATUS values:
 - PENDING | cost to remodel kitchen jacksonville 2026 | interior | Jacksonville
 - PENDING | cost to install whole house generator florida 2026 | electrical | Florida
 - PENDING | cost to replace windows fort lauderdale 2026 | exterior | Fort Lauderdale
+
+## Published
+
+- 2026-04-02 | cost to replace roof in Florida 2026 | [roofing](content/posts/cost-to-replace-roof-in-florida-2026.md) | Florida
