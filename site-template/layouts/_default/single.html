@@ -1,0 +1,135 @@
+{{ define "main" }}
+<main>
+  <div class="page-wrapper">
+    <!-- Article Content -->
+    <article>
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs">
+        <a href="/">Home</a>
+        <span>›</span>
+        {{ with .Params.category }}
+        <a href="/{{ . }}/">{{ . | humanize | title }}</a>
+        <span>›</span>
+        {{ end }}
+        <span>{{ .Title | truncate 60 }}</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="article-header">
+        {{ with .Params.category }}
+        <span class="article-category">{{ . | humanize }}</span>
+        {{ end }}
+        <h1 class="article-title">{{ .Title }}</h1>
+        <div class="article-meta">
+          {{ if .Params.location }}<span>📍 {{ .Params.location }}, Florida</span><span class="divider"></span>{{ end }}
+          <span>Updated {{ .Date.Format "January 2, 2006" }}</span>
+          <span class="divider"></span>
+          <span>{{ .ReadingTime }} min read</span>
+        </div>
+      </header>
+
+      <!-- Hero Image -->
+      {{ if .Params.hero_image }}
+      <figure class="article-hero">
+        <img src="{{ .Params.hero_image }}" alt="{{ .Params.hero_image_alt | default .Title }}" loading="eager">
+        {{ with .Params.hero_image_credit }}
+        <figcaption>Photo: {{ . }}</figcaption>
+        {{ end }}
+      </figure>
+      {{ end }}
+
+      <!-- AD SLOT: BELOW HERO / ABOVE CONTENT -->
+      <div class="ad-slot" id="ad-above-content">
+        <!-- ADSENSE AD UNIT — PASTE IN-ARTICLE AD CODE HERE -->
+        <span class="ad-slot-label">Advertisement</span>
+      </div>
+
+      <!-- Article Body -->
+      <div class="article-body">
+        {{ .Content }}
+      </div>
+
+      <!-- AD SLOT: BELOW CONTENT -->
+      <div class="ad-slot" id="ad-below-content">
+        <!-- ADSENSE AD UNIT — PASTE IN-ARTICLE AD CODE HERE -->
+        <span class="ad-slot-label">Advertisement</span>
+      </div>
+
+      <!-- Related Articles -->
+      {{ $category := .Params.category }}
+      {{ $related := where (where .Site.RegularPages "Params.category" $category) "Permalink" "!=" .Permalink | first 3 }}
+      {{ if $related }}
+      <section style="margin-top: 48px;">
+        <h2 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 24px;">Related Cost Guides</h2>
+        <div class="category-grid">
+          {{ range $related }}
+          <div class="article-card">
+            {{ if .Params.hero_image }}
+            <img src="{{ .Params.hero_image }}" alt="{{ .Title }}" loading="lazy">
+            {{ end }}
+            <div class="article-card-body">
+              <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+              <p>{{ .Params.description | truncate 120 }}</p>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </section>
+      {{ end }}
+
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Table of Contents -->
+      {{ if .TableOfContents }}
+      <div class="sidebar-widget toc-widget ad-sidebar">
+        <h3>In This Guide</h3>
+        {{ .TableOfContents }}
+      </div>
+      {{ end }}
+
+      <!-- AD SLOT: SIDEBAR TOP -->
+      <div class="ad-slot ad-sidebar" id="ad-sidebar-top">
+        <!-- ADSENSE AD UNIT — PASTE SIDEBAR AD CODE HERE -->
+        <span class="ad-slot-label">Advertisement</span>
+      </div>
+
+      <!-- Quick Cost Widget -->
+      {{ if and .Params.cost_low .Params.cost_high }}
+      <div class="sidebar-widget" style="text-align:center;">
+        <h3>Quick Estimate</h3>
+        <div style="font-size: 32px; font-weight: 700; color: var(--color-accent-dark); font-family: var(--font-heading);">
+          ${{ .Params.cost_low | lang.FormatNumber 0 }} – ${{ .Params.cost_high | lang.FormatNumber 0 }}
+        </div>
+        <p style="font-size: 13px; color: var(--color-text-secondary); margin-top: 8px;">
+          Average range in {{ .Params.location | default "Florida" }}
+        </p>
+      </div>
+      {{ end }}
+
+      <!-- CTA Widget -->
+      <div class="sidebar-widget cta-widget">
+        <h3>Get Free Quotes</h3>
+        <p>Connect with licensed Florida contractors in your area. Free estimates, no obligation.</p>
+      </div>
+
+      <!-- AD SLOT: SIDEBAR BOTTOM -->
+      <div class="ad-slot ad-sidebar" id="ad-sidebar-bottom">
+        <!-- ADSENSE AD UNIT — PASTE SIDEBAR AD CODE HERE -->
+        <span class="ad-slot-label">Advertisement</span>
+      </div>
+
+      <!-- Popular Guides -->
+      <div class="sidebar-widget">
+        <h3>Popular Guides</h3>
+        <ul>
+          {{ range first 5 .Site.RegularPages.ByDate.Reverse }}
+          <li><a href="{{ .Permalink }}">{{ .Title | truncate 55 }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</main>
+{{ end }}

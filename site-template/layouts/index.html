@@ -1,0 +1,79 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero-section">
+  <h1>Florida Home Improvement Cost Guides</h1>
+  <p>Accurate pricing, local building codes, and contractor advice for every Florida county. Updated for {{ now.Format "2006" }}.</p>
+  <div class="category-nav">
+    <a href="/roofing/">🏠 Roofing</a>
+    <a href="/hurricane-protection/">🌀 Hurricane Protection</a>
+    <a href="/exterior/">🏡 Exterior</a>
+    <a href="/interior/">🛋 Interior</a>
+    <a href="/plumbing/">🔧 Plumbing</a>
+    <a href="/electrical/">⚡ Electrical</a>
+    <a href="/hvac/">❄️ HVAC</a>
+    <a href="/major-systems/">🔩 Major Systems</a>
+    <a href="/pool/">🏊 Pool</a>
+  </div>
+</section>
+
+<main>
+  <!-- AD SLOT: BELOW HERO -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+    <div class="ad-slot" id="ad-home-top">
+      <span class="ad-slot-label">Advertisement</span>
+    </div>
+  </div>
+
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px 24px;">
+
+    <!-- Latest Articles -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: var(--font-heading); font-size: 28px; margin-bottom: 24px;">Latest Cost Guides</h2>
+      <div class="category-grid">
+        {{ range first 9 .Site.RegularPages.ByDate.Reverse }}
+        <div class="article-card">
+          {{ if .Params.hero_image }}
+          <img src="{{ .Params.hero_image }}" alt="{{ .Title }}" loading="lazy">
+          {{ end }}
+          <div class="article-card-body">
+            {{ with .Params.category }}
+            <span class="article-category" style="font-size:11px; padding: 2px 8px; margin-bottom: 8px;">{{ . | humanize }}</span>
+            {{ end }}
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            <p>{{ .Params.description | truncate 120 }}</p>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    {{ $categories := slice "roofing" "hurricane-protection" "exterior" "interior" "plumbing" "electrical" "hvac" "pool" }}
+    {{ range $cat := $categories }}
+    {{ $pages := where $.Site.RegularPages "Params.category" $cat }}
+    {{ if $pages }}
+    <section style="margin-bottom: 48px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="font-family: var(--font-heading); font-size: 24px;">{{ $cat | humanize | title }}</h2>
+        <a href="/{{ $cat }}/" style="color: var(--color-accent); font-size: 14px; font-weight: 500;">View all →</a>
+      </div>
+      <div class="category-grid">
+        {{ range first 3 $pages }}
+        <div class="article-card">
+          {{ if .Params.hero_image }}
+          <img src="{{ .Params.hero_image }}" alt="{{ .Title }}" loading="lazy">
+          {{ end }}
+          <div class="article-card-body">
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            <p>{{ .Params.description | truncate 120 }}</p>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+    {{ end }}
+
+  </div>
+</main>
+{{ end }}
