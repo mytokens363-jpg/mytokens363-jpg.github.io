@@ -1,12 +1,11 @@
-# .github/workflows/deploy.yml
 # Auto-deploys Hugo site to GitHub Pages on every push to main
 
-name: Deploy Hugo Site
+name: Hugo Build and Deploy
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:  # Manual trigger option
+  workflow_dispatch:
 
 permissions:
   contents: read
