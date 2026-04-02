@@ -43,6 +43,39 @@ QUEUE_FILE = REPO_PATH / "keyword-queue.md"
 PUBLISHING_LOG_FILE = REPO_PATH / "publishing-log.md"
 NIGHT_SHIFT_LOG_FILE = REPO_PATH / "night-shift-log.md"
 QUARANTINE_DIR = REPO_PATH / "quarantine"
+STATUS_FILE = REPO_PATH / "pipeline-status.json"
+
+
+# ─── Live status emitter (for dashboard) ──────────────────────────────
+# Writes JSON to ~/site-repo/pipeline-status.json every step.
+# Dashboard polls this file every 5s for live agent card updates.
+
+_pipeline_status: dict = {
+    "run_active":      False,
+    "run_started":     None,
+    "articles_target": 0,
+    "articles_done":   0,
+    "current_article": None,
+    "results":         [],
+    "writer":  {"state": "waiting", "keyword": None, "detail": None, "score": None, "verdict": None},
+    "editor":  {"state": "waiting", "keyword": None, "detail": None, "score": None, "verdict": None},
+    "seo":     {"state": "waiting", "keyword": None, "detail": None, "score": None, "verdict": None},
+    "last_updated": None,
+}
+
+
+def emit_status(**updates):
+    """Update pipeline status fields and flush to disk."""
+    _pipeline_status.update(updates)
+    _pipeline_status["last_updated"] = datetime.datetime.now().isoformat()
+    REPO_PATH.mkdir(parents=True, exist_ok=True)
+    STATUS_FILE.write_text(json.dumps(_pipeline_status, indent=2))
+
+
+def emit_agent(agent: str, state: str, keyword: str = None, detail: str = None, score=None, verdict: str = None):
+    """Update a single agent's live status card."""
+    _pipeline_status[agent] = {"state": state, "keyword": keyword, "detail": detail, "score": score, "verdict": verdict}
+    emit_status()
 
 PROMPTS_DIR = Path.home() / "rivet-business" / "prompts"
 
@@ -392,6 +425,7 @@ def run_pipeline_for_keyword(keyword_data: dict, prompts: dict) -> bool:
 
         # ── Step 1: Writer generates or rewrites the article ──────────────────
         print("  ✍️  Writer working...")
+        emit_agent("writer", "working", keyword=keyword, detail=f"Round {revision_round} — drafting...")
         article_content = write_article(
             keyword=keyword,
             category=category,
@@ -404,6 +438,8 @@ def run_pipeline_for_keyword(keyword_data: dict, prompts: dict) -> bool:
 
         # ── Step 2: Editor reviews the article ────────────────────────────────
         print("  📋 Editor reviewing...")
+        emit_agent("writer", "done",    keyword=keyword, detail="Draft complete")
+        emit_agent("editor", "working", keyword=keyword, detail="Reviewing quality...")
         editor_review_result = run_editor_review(
             article_content=article_content,
             keyword=keyword,
@@ -412,9 +448,11 @@ def run_pipeline_for_keyword(keyword_data: dict, prompts: dict) -> bool:
         editor_verdict = editor_review_result.get("verdict", "REVISE")
         editor_score = editor_review_result.get("overall_score", "N/A")
         print(f"     Editor verdict: {editor_verdict} (score: {editor_score})")
+        emit_agent("editor", "done", keyword=keyword, detail=f"Score: {editor_score}", score=editor_score, verdict=editor_verdict)
 
         # ── Step 3: SEO reviews the article ───────────────────────────────────
         print("  🔍 SEO reviewing...")
+        emit_agent("seo", "working", keyword=keyword, detail="Analyzing SEO...")
         seo_review_result = run_seo_review(
             article_content=article_content,
             keyword=keyword,
@@ -423,6 +461,7 @@ def run_pipeline_for_keyword(keyword_data: dict, prompts: dict) -> bool:
         seo_verdict = seo_review_result.get("verdict", "REVISE")
         seo_score = seo_review_result.get("overall_seo_score", "N/A")
         print(f"     SEO verdict: {seo_verdict} (score: {seo_score})")
+        emit_agent("seo", "done", keyword=keyword, detail=f"Score: {seo_score}", score=seo_score, verdict=seo_verdict)
 
         # ── Step 4: Consensus check ────────────────────────────────────────────
         # BOTH Editor AND SEO must approve. Either rejection = revise.
@@ -492,6 +531,14 @@ def run_night_shift():
     print(f"\n🌙 NIGHT SHIFT STARTED — {night_shift_start_time.strftime('%Y-%m-%d %H:%M')}")
     print(f"   Target: {ARTICLES_PER_NIGHT} articles\n")
 
+    emit_status(
+        run_active=True,
+        run_started=night_shift_start_time.isoformat(),
+        articles_target=ARTICLES_PER_NIGHT,
+        articles_done=0,
+        results=[],
+    )
+
     # Pull latest repo state
     subprocess.run(["git", "pull", "origin", "main"], cwd=REPO_PATH, check=True)
 
@@ -520,8 +567,13 @@ def run_night_shift():
 
             if article_published:
                 night_results["published"] += 1
+                result_status = "PUBLISHED"
             else:
                 night_results["quarantined"] += 1
+                result_status = "QUARANTINED"
+
+            _pipeline_status["results"].append({"keyword": keyword_data["keyword"], "status": result_status, "revisions": 0})
+            emit_status(articles_done=night_results["published"] + night_results["quarantined"])
 
         except Exception as pipeline_error:
             print(f"  💥 ERROR: {pipeline_error}")
@@ -544,6 +596,13 @@ def run_night_shift():
 
     with open(NIGHT_SHIFT_LOG_FILE, "a") as night_log:
         night_log.write(summary_text)
+
+    emit_status(
+        run_active=False,
+        writer={"state": "waiting", "keyword": None, "detail": None, "score": None, "verdict": None},
+        editor={"state": "waiting", "keyword": None, "detail": None, "score": None, "verdict": None},
+        seo={"state": "waiting", "keyword": None, "detail": None, "score": None, "verdict": None},
+    )
 
     print(f"\n🌅 NIGHT SHIFT COMPLETE")
     print(f"   Published:   {night_results['published']}")

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Night Shift — Pipeline Dashboard</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #0d1117;
+      --surface:    #161b22;
+      --border:     #30363d;
+      --text:       #e6edf3;
+      --muted:      #8b949e;
+      --accent:     #58a6ff;
+      --green:      #3fb950;
+      --yellow:     #d29922;
+      --red:        #f85149;
+      --purple:     #bc8cff;
+      --writer:     #58a6ff;
+      --editor:     #3fb950;
+      --seo:        #d29922;
+      --sidebar-w:  260px;
+    }
+    html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+
+    /* ── Layout ── */
+    .layout { display: flex; height: 100vh; overflow: hidden; }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w); min-width: var(--sidebar-w);
+      background: var(--surface); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .sidebar-header { padding: 16px; border-bottom: 1px solid var(--border); }
+    .sidebar-header h1 { font-size: 15px; font-weight: 600; color: var(--text); }
+    .sidebar-header p  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 8px 0; }
+    .nav-section { margin-bottom: 4px; }
+    .nav-label {
+      font-size: 10px; font-weight: 600; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 16px 4px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 16px; cursor: pointer; color: var(--muted);
+      transition: background .1s, color .1s; border-radius: 0;
+    }
+    .nav-item:hover, .nav-item.active { background: rgba(88,166,255,.1); color: var(--text); }
+    .nav-item .badge {
+      margin-left: auto; background: var(--border); color: var(--muted);
+      font-size: 10px; padding: 1px 6px; border-radius: 10px; min-width: 20px; text-align: center;
+    }
+    .nav-item .badge.green  { background: rgba(63,185,80,.2);  color: var(--green); }
+    .nav-item .badge.yellow { background: rgba(210,153,34,.2); color: var(--yellow); }
+    .nav-item .badge.red    { background: rgba(248,81,73,.2);  color: var(--red); }
+
+    .sidebar-actions { padding: 12px; border-top: 1px solid var(--border); }
+    .btn-run {
+      width: 100%; padding: 8px; border-radius: 6px;
+      background: var(--accent); color: #fff; border: none;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn-run:hover { opacity: .85; }
+    .btn-run:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Main area ── */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    .topbar {
+      height: 48px; min-height: 48px;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 20px; gap: 12px;
+    }
+    .topbar-title { font-size: 15px; font-weight: 600; flex: 1; }
+    .run-status {
+      font-size: 12px; padding: 3px 10px; border-radius: 12px;
+      background: rgba(63,185,80,.15); color: var(--green);
+    }
+    .run-status.idle    { background: rgba(139,148,158,.1); color: var(--muted); }
+    .run-status.running { background: rgba(88,166,255,.15); color: var(--accent); }
+
+    .content { flex: 1; overflow-y: auto; padding: 20px; }
+
+    /* ── Panels: agent cards ── */
+    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+
+    .agent-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+    .agent-card-header {
+      padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .agent-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+    .agent-dot.working { background: var(--accent); animation: pulse 1.5s infinite; }
+    .agent-dot.done    { background: var(--green); }
+    .agent-dot.waiting { background: var(--muted); }
+    .agent-dot.error   { background: var(--red); }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+    .agent-name { font-size: 13px; font-weight: 600; }
+    .agent-model { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+    .agent-card-body { padding: 12px 14px; min-height: 80px; }
+    .agent-state { font-size: 12px; color: var(--muted); }
+    .agent-state .keyword { color: var(--text); font-weight: 500; display: block; margin-bottom: 4px; }
+    .agent-state .detail  { color: var(--muted); font-size: 11px; }
+    .agent-score { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-top: 6px; }
+    .agent-score.high   { background: rgba(63,185,80,.2);  color: var(--green); }
+    .agent-score.medium { background: rgba(210,153,34,.2); color: var(--yellow); }
+    .agent-score.low    { background: rgba(248,81,73,.2);  color: var(--red); }
+
+    /* Chat area inside agent card */
+    .agent-chat-toggle {
+      width: 100%; padding: 6px 14px; background: none;
+      border: none; border-top: 1px solid var(--border);
+      color: var(--accent); font-size: 12px; cursor: pointer; text-align: left;
+    }
+    .agent-chat-toggle:hover { background: rgba(88,166,255,.07); }
+    .chat-panel { display: none; flex-direction: column; border-top: 1px solid var(--border); }
+    .chat-panel.open { display: flex; }
+    .chat-messages { max-height: 200px; overflow-y: auto; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+    .chat-msg { padding: 6px 10px; border-radius: 6px; font-size: 12px; line-height: 1.5; max-width: 90%; white-space: pre-wrap; }
+    .chat-msg.user      { background: rgba(88,166,255,.15); color: var(--text); align-self: flex-end; }
+    .chat-msg.assistant { background: var(--border); color: var(--text); align-self: flex-start; }
+    .chat-msg.thinking  { color: var(--muted); font-style: italic; }
+    .chat-input-row { display: flex; padding: 8px 10px; gap: 6px; border-top: 1px solid var(--border); }
+    .chat-input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 12px; resize: none;
+    }
+    .chat-input:focus { outline: none; border-color: var(--accent); }
+    .btn-send {
+      background: var(--accent); color: #fff; border: none;
+      padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
+    }
+    .btn-send:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Tabs for content views ── */
+    .tab-bar { display: flex; gap: 4px; margin-bottom: 16px; }
+    .tab {
+      padding: 6px 14px; border-radius: 6px; font-size: 13px;
+      cursor: pointer; color: var(--muted); background: none; border: none;
+      transition: background .1s, color .1s;
+    }
+    .tab:hover  { background: rgba(255,255,255,.05); color: var(--text); }
+    .tab.active { background: rgba(88,166,255,.15); color: var(--accent); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Table ── */
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    .data-table td { padding: 10px 12px; border-bottom: 1px solid rgba(48,54,61,.5); font-size: 12px; vertical-align: middle; }
+    .data-table tr:hover td { background: rgba(255,255,255,.02); }
+    .data-table .keyword-cell { color: var(--text); font-weight: 500; }
+    .data-table .status-pill {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+    }
+    .pill-published   { background: rgba(63,185,80,.15);  color: var(--green); }
+    .pill-pending     { background: rgba(88,166,255,.15); color: var(--accent); }
+    .pill-progress    { background: rgba(210,153,34,.15); color: var(--yellow); }
+    .pill-quarantined { background: rgba(248,81,73,.15);  color: var(--red); }
+
+    .btn-sm {
+      padding: 4px 10px; border-radius: 5px; font-size: 11px;
+      cursor: pointer; border: 1px solid var(--border); background: none;
+      color: var(--text); transition: background .1s;
+    }
+    .btn-sm:hover   { background: rgba(255,255,255,.06); }
+    .btn-sm.danger  { color: var(--red);  border-color: rgba(248,81,73,.4); }
+    .btn-sm.primary { color: var(--accent); border-color: rgba(88,166,255,.4); }
+    .btn-sm.success { color: var(--green); border-color: rgba(63,185,80,.4); }
+
+    /* ── Add keyword form ── */
+    .add-keyword-form {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; margin-bottom: 20px;
+      display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-size: 11px; color: var(--muted); }
+    .form-input {
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 7px 10px; border-radius: 6px; font-size: 13px;
+    }
+    .form-input:focus { outline: none; border-color: var(--accent); }
+    .form-input.wide { min-width: 220px; }
+
+    /* ── Quarantine detail modal ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.65); z-index: 100;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; width: 780px; max-width: 95vw; max-height: 88vh;
+      display: flex; flex-direction: column;
+    }
+    .modal-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .modal-header h2 { font-size: 15px; font-weight: 600; flex: 1; }
+    .modal-close {
+      background: none; border: none; color: var(--muted);
+      font-size: 20px; cursor: pointer; line-height: 1; padding: 2px 6px;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .modal-section h3 { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+    .review-notes { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .review-notes li { font-size: 12px; color: var(--text); padding: 5px 10px; background: rgba(255,255,255,.03); border-radius: 4px; border-left: 2px solid var(--border); }
+    .review-notes li.editor-note { border-color: var(--editor); }
+    .review-notes li.seo-note    { border-color: var(--seo); }
+    .article-preview {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 12px; font-family: monospace;
+      font-size: 11px; color: var(--muted); max-height: 200px;
+      overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+    }
+    .human-notes-input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 10px; border-radius: 6px;
+      font-size: 13px; min-height: 80px; resize: vertical;
+    }
+    .human-notes-input:focus { outline: none; border-color: var(--accent); }
+    .modal-actions { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
+    .btn {
+      padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 500;
+      cursor: pointer; border: 1px solid var(--border); transition: opacity .15s;
+    }
+    .btn:hover { opacity: .85; }
+    .btn-primary { background: var(--accent);  color: #fff; border-color: var(--accent); }
+    .btn-danger  { background: var(--red);     color: #fff; border-color: var(--red); }
+    .btn-default { background: none; color: var(--text); }
+
+    /* ── Empty state ── */
+    .empty { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 13px; }
+    .empty-icon { font-size: 28px; margin-bottom: 8px; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>🌙 Night Shift</h1>
+      <p>Article Pipeline Dashboard</p>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-label">Pipeline</div>
+        <div class="nav-item active" onclick="showTab('agents')">
+          <span>⚡</span> Agents
+        </div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Articles</div>
+        <div class="nav-item" onclick="showTab('queue')">
+          <span>📋</span> Queue
+          <span class="badge" id="badge-queue">0</span>
+        </div>
+        <div class="nav-item" onclick="showTab('published')">
+          <span>✅</span> Published
+          <span class="badge green" id="badge-published">0</span>
+        </div>
+        <div class="nav-item" onclick="showTab('quarantine')">
+          <span>⚠️</span> Quarantined
+          <span class="badge red" id="badge-quarantine">0</span>
+        </div>
+      </div>
+    </nav>
+    <div class="sidebar-actions">
+      <button class="btn-run" id="btn-run" onclick="triggerRun()">▶ Run Pipeline Now</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <span class="topbar-title" id="topbar-title">Agent Monitor</span>
+      <span class="run-status idle" id="run-status">Idle</span>
+      <span style="font-size:11px;color:var(--muted)" id="last-updated"></span>
+    </div>
+
+    <div class="content">
+
+      <!-- AGENTS TAB -->
+      <div class="tab-content active" id="tab-agents">
+        <div class="agents-grid" id="agents-grid">
+
+          <!-- Writer -->
+          <div class="agent-card" id="card-writer">
+            <div class="agent-card-header">
+              <div class="agent-dot waiting" id="dot-writer"></div>
+              <span class="agent-name" style="color:var(--writer)">✍️ Writer</span>
+              <span class="agent-model">Qwen 35B</span>
+            </div>
+            <div class="agent-card-body" id="body-writer">
+              <div class="agent-state"><span class="detail">Waiting for run...</span></div>
+            </div>
+            <button class="agent-chat-toggle" onclick="toggleChat('writer')">💬 Chat with Writer</button>
+            <div class="chat-panel" id="chat-writer">
+              <div class="chat-messages" id="msgs-writer"></div>
+              <div class="chat-input-row">
+                <textarea class="chat-input" id="input-writer" rows="2" placeholder="Ask the writer..."></textarea>
+                <button class="btn-send" id="send-writer" onclick="sendChat('writer')">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor -->
+          <div class="agent-card" id="card-editor">
+            <div class="agent-card-header">
+              <div class="agent-dot waiting" id="dot-editor"></div>
+              <span class="agent-name" style="color:var(--editor)">📋 Editor</span>
+              <span class="agent-model">Qwen 122B</span>
+            </div>
+            <div class="agent-card-body" id="body-editor">
+              <div class="agent-state"><span class="detail">Waiting for run...</span></div>
+            </div>
+            <button class="agent-chat-toggle" onclick="toggleChat('editor')">💬 Chat with Editor</button>
+            <div class="chat-panel" id="chat-editor">
+              <div class="chat-messages" id="msgs-editor"></div>
+              <div class="chat-input-row">
+                <textarea class="chat-input" id="input-editor" rows="2" placeholder="Ask the editor..."></textarea>
+                <button class="btn-send" id="send-editor" onclick="sendChat('editor')">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO -->
+          <div class="agent-card" id="card-seo">
+            <div class="agent-card-header">
+              <div class="agent-dot waiting" id="dot-seo"></div>
+              <span class="agent-name" style="color:var(--seo)">🔍 SEO</span>
+              <span class="agent-model">Qwen 122B</span>
+            </div>
+            <div class="agent-card-body" id="body-seo">
+              <div class="agent-state"><span class="detail">Waiting for run...</span></div>
+            </div>
+            <button class="agent-chat-toggle" onclick="toggleChat('seo')">💬 Chat with SEO</button>
+            <div class="chat-panel" id="chat-seo">
+              <div class="chat-messages" id="msgs-seo"></div>
+              <div class="chat-input-row">
+                <textarea class="chat-input" id="input-seo" rows="2" placeholder="Ask the SEO analyst..."></textarea>
+                <button class="btn-send" id="send-seo" onclick="sendChat('seo')">Send</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Run history -->
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Run History</div>
+        <div id="run-history" style="color:var(--muted);font-size:12px;">No runs yet.</div>
+      </div>
+
+      <!-- QUEUE TAB -->
+      <div class="tab-content" id="tab-queue">
+        <div class="add-keyword-form">
+          <div class="form-group">
+            <label>Keyword</label>
+            <input class="form-input wide" id="kw-keyword" placeholder="cost to replace roof fort lauderdale 2026">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input class="form-input" id="kw-category" placeholder="roofing" style="width:120px">
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input class="form-input" id="kw-location" placeholder="Fort Lauderdale" style="width:140px">
+          </div>
+          <button class="btn btn-primary" onclick="addKeyword()" style="margin-bottom:0">+ Add</button>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Status</th><th>Keyword</th><th>Category</th><th>Location</th><th>Notes</th></tr></thead>
+          <tbody id="queue-tbody"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- PUBLISHED TAB -->
+      <div class="tab-content" id="tab-published">
+        <table class="data-table">
+          <thead><tr><th>Date</th><th>Keyword</th><th>File</th><th>Editor</th><th>SEO</th><th>Status</th></tr></thead>
+          <tbody id="published-tbody"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- QUARANTINE TAB -->
+      <div class="tab-content" id="tab-quarantine">
+        <table class="data-table">
+          <thead><tr><th>Date</th><th>Keyword</th><th>Rounds</th><th>Editor</th><th>SEO</th><th>Actions</th></tr></thead>
+          <tbody id="quarantine-tbody"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<!-- QUARANTINE DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-title">Quarantined Article</h2>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3>Review Notes</h3>
+        <ul class="review-notes" id="modal-notes"></ul>
+      </div>
+      <div class="modal-section">
+        <h3>Article Preview</h3>
+        <div class="article-preview" id="modal-article"></div>
+      </div>
+      <div class="modal-section">
+        <h3>Your Instructions (sent to Writer on rewrite)</h3>
+        <textarea class="human-notes-input" id="modal-human-notes" placeholder="e.g. Focus more on HVAC cost breakdowns. Remove solar section. Add permit cost table."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-default" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-danger"  onclick="deleteArticle()">🗑 Delete</button>
+      <button class="btn btn-primary" onclick="rewriteArticle()">🔄 Rewrite &amp; Re-queue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+let activeTab   = 'agents';
+let currentItem = null;
+let pollTimer   = null;
+
+// ── Tab navigation ─────────────────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+
+  const labels = { agents: 'Agent Monitor', queue: 'Keyword Queue', published: 'Published Articles', quarantine: 'Quarantine' };
+  document.getElementById('topbar-title').textContent = labels[name] || name;
+
+  // Mark nav item active
+  document.querySelectorAll('.nav-item').forEach(el => {
+    if (el.textContent.toLowerCase().includes(name) || (name === 'agents' && el.textContent.includes('Agents'))) {
+      el.classList.add('active');
+    }
+  });
+
+  activeTab = name;
+  refreshTab(name);
+}
+
+function refreshTab(name) {
+  if (name === 'queue')      loadQueue();
+  if (name === 'published')  loadPublished();
+  if (name === 'quarantine') loadQuarantine();
+  if (name === 'agents')     loadStatus();
+}
+
+// ── Poll pipeline status every 5s ─────────────────────────────────────────────
+async function loadStatus() {
+  try {
+    const data = await fetch('/api/status').then(r => r.json());
+    updateAgentCards(data);
+    updateRunStatus(data);
+  } catch(e) {}
+}
+
+function updateRunStatus(data) {
+  const el = document.getElementById('run-status');
+  if (data.run_active) {
+    el.textContent = `Running — ${data.articles_done}/${data.articles_target}`;
+    el.className   = 'run-status running';
+    document.getElementById('btn-run').disabled = true;
+  } else {
+    el.textContent = 'Idle';
+    el.className   = 'run-status idle';
+    document.getElementById('btn-run').disabled = false;
+  }
+  if (data.last_updated) {
+    document.getElementById('last-updated').textContent = 'Updated: ' + new Date(data.last_updated).toLocaleTimeString();
+  }
+}
+
+function updateAgentCards(data) {
+  const agents = ['writer','editor','seo'];
+  agents.forEach(agent => {
+    const agentData = data[agent] || {};
+    const dot  = document.getElementById('dot-' + agent);
+    const body = document.getElementById('body-' + agent);
+
+    const state = agentData.state || 'waiting';
+    dot.className = 'agent-dot ' + state;
+
+    if (!agentData.keyword) {
+      body.innerHTML = `<div class="agent-state"><span class="detail">Waiting for run...</span></div>`;
+      return;
+    }
+
+    let scoreHtml = '';
+    if (agentData.score != null) {
+      const scoreClass = agentData.score >= 8 ? 'high' : agentData.score >= 6 ? 'medium' : 'low';
+      scoreHtml = `<span class="agent-score ${scoreClass}">${agentData.score}/10</span>`;
+    }
+
+    let verdictHtml = '';
+    if (agentData.verdict) {
+      const vc = agentData.verdict === 'APPROVE' ? 'high' : 'low';
+      verdictHtml = `<span class="agent-score ${vc}" style="margin-left:4px">${agentData.verdict}</span>`;
+    }
+
+    body.innerHTML = `
+      <div class="agent-state">
+        <span class="keyword">${agentData.keyword}</span>
+        <span class="detail">${agentData.detail || ''}</span>
+        <div style="margin-top:6px">${scoreHtml}${verdictHtml}</div>
+      </div>`;
+  });
+
+  // Run history
+  if (data.results && data.results.length > 0) {
+    const rows = data.results.slice().reverse().map(r => {
+      const cls = r.status === 'PUBLISHED' ? 'pill-published' : 'pill-quarantined';
+      return `<div style="padding:6px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center">
+        <span class="status-pill ${cls}">${r.status}</span>
+        <span style="color:var(--text)">${r.keyword}</span>
+        <span style="color:var(--muted);font-size:11px;margin-left:auto">${r.revisions || 0} revisions</span>
+      </div>`;
+    }).join('');
+    document.getElementById('run-history').innerHTML = rows;
+  }
+}
+
+// ── Queue ──────────────────────────────────────────────────────────────────────
+async function loadQueue() {
+  const items = await fetch('/api/queue').then(r => r.json());
+  document.getElementById('badge-queue').textContent = items.filter(i => i.status === 'PENDING').length;
+
+  const tbody = document.getElementById('queue-tbody');
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="5"><div class="empty"><div class="empty-icon">📋</div>Queue is empty</div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map(item => {
+    const pillClass = {'PENDING':'pill-pending','IN_PROGRESS':'pill-progress','PUBLISHED':'pill-published','QUARANTINED':'pill-quarantined'}[item.status] || '';
+    return `<tr>
+      <td><span class="status-pill ${pillClass}">${item.status}</span></td>
+      <td class="keyword-cell">${item.keyword}</td>
+      <td>${item.category}</td>
+      <td>${item.location}</td>
+      <td style="color:var(--muted)">${item.notes || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+async function addKeyword() {
+  const keyword  = document.getElementById('kw-keyword').value.trim();
+  const category = document.getElementById('kw-category').value.trim() || 'general';
+  const location = document.getElementById('kw-location').value.trim() || 'Florida';
+  if (!keyword) return;
+  await fetch('/api/queue/add', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({keyword,category,location}) });
+  document.getElementById('kw-keyword').value = '';
+  loadQueue();
+}
+
+// ── Published ──────────────────────────────────────────────────────────────────
+async function loadPublished() {
+  const items = await fetch('/api/published').then(r => r.json());
+  document.getElementById('badge-published').textContent = items.length;
+  const tbody = document.getElementById('published-tbody');
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty"><div class="empty-icon">✅</div>No articles published yet</div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map(item => `<tr>
+    <td style="color:var(--muted)">${item.date}</td>
+    <td class="keyword-cell">${item.keyword}</td>
+    <td style="color:var(--muted);font-size:11px">${item.file}</td>
+    <td>${item.editor_score}</td>
+    <td>${item.seo_score}</td>
+    <td><span class="status-pill pill-published">LIVE</span></td>
+  </tr>`).join('');
+}
+
+// ── Quarantine ─────────────────────────────────────────────────────────────────
+async function loadQuarantine() {
+  const items = await fetch('/api/quarantine').then(r => r.json());
+  document.getElementById('badge-quarantine').textContent = items.length;
+  const tbody = document.getElementById('quarantine-tbody');
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty"><div class="empty-icon">✨</div>No quarantined articles</div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map(item => `<tr>
+    <td style="color:var(--muted)">${new Date(item.quarantined_at).toLocaleDateString()}</td>
+    <td class="keyword-cell">${item.keyword}</td>
+    <td>${item.revision_rounds}</td>
+    <td>${item.editor_score}</td>
+    <td>${item.seo_score}</td>
+    <td style="display:flex;gap:6px">
+      <button class="btn-sm primary" onclick="openModal('${item.id}')">View</button>
+      <button class="btn-sm success" onclick="quickRewrite('${item.id}')">Rewrite</button>
+      <button class="btn-sm danger"  onclick="quickDelete('${item.id}')">Delete</button>
+    </td>
+  </tr>`).join('');
+}
+
+// ── Quarantine modal ───────────────────────────────────────────────────────────
+async function openModal(id) {
+  const data = await fetch('/api/quarantine/' + id).then(r => r.json());
+  currentItem = { id, data };
+
+  document.getElementById('modal-title').textContent = '⚠️ ' + data.keyword;
+  document.getElementById('modal-human-notes').value = '';
+
+  // Build review notes
+  const notes = [];
+  (data.editor_final_review?.revision_notes || []).forEach(n => notes.push({ text: n, type: 'editor' }));
+  (data.seo_final_review?.revision_notes    || []).forEach(n => notes.push({ text: n, type: 'seo' }));
+
+  document.getElementById('modal-notes').innerHTML = notes.length
+    ? notes.map(n => `<li class="${n.type}-note">[${n.type.toUpperCase()}] ${n.text}</li>`).join('')
+    : '<li style="color:var(--muted)">No review notes recorded.</li>';
+
+  document.getElementById('modal-article').textContent = (data.article || '').substring(0, 2000) + (data.article?.length > 2000 ? '\n...[truncated]' : '');
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  currentItem = null;
+}
+
+async function deleteArticle() {
+  if (!currentItem || !confirm(`Delete "${currentItem.data.keyword}"? This cannot be undone.`)) return;
+  await fetch(`/api/quarantine/${currentItem.id}/delete`, { method: 'POST' });
+  closeModal();
+  loadQuarantine();
+}
+
+async function rewriteArticle() {
+  if (!currentItem) return;
+  const notes = document.getElementById('modal-human-notes').value.trim();
+  await fetch(`/api/quarantine/${currentItem.id}/rewrite`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ notes }),
+  });
+  closeModal();
+  loadQuarantine();
+  loadQueue();
+  alert('Re-queued! Will be picked up on next pipeline run.');
+}
+
+async function quickRewrite(id) {
+  await fetch(`/api/quarantine/${id}/rewrite`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({notes:''}) });
+  loadQuarantine();
+  loadQueue();
+}
+
+async function quickDelete(id) {
+  if (!confirm('Delete this quarantined article?')) return;
+  await fetch(`/api/quarantine/${id}/delete`, { method: 'POST' });
+  loadQuarantine();
+}
+
+// ── Agent chat ─────────────────────────────────────────────────────────────────
+function toggleChat(agent) {
+  const panel = document.getElementById('chat-' + agent);
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) loadChatHistory(agent);
+}
+
+async function loadChatHistory(agent) {
+  const data  = await fetch('/api/chat/' + agent).then(r => r.json());
+  renderMessages(agent, data.messages || []);
+}
+
+function renderMessages(agent, messages) {
+  const el = document.getElementById('msgs-' + agent);
+  if (!messages.length) {
+    el.innerHTML = `<div class="chat-msg thinking">No messages yet. Ask the ${agent} anything.</div>`;
+    return;
+  }
+  el.innerHTML = messages.map(m => `<div class="chat-msg ${m.role}">${escHtml(m.content)}</div>`).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+async function sendChat(agent) {
+  const input  = document.getElementById('input-' + agent);
+  const btn    = document.getElementById('send-' + agent);
+  const msg    = input.value.trim();
+  if (!msg) return;
+
+  btn.disabled = true;
+  input.value  = '';
+
+  // Optimistic add
+  const msgs   = document.getElementById('msgs-' + agent);
+  msgs.innerHTML += `<div class="chat-msg user">${escHtml(msg)}</div>`;
+  msgs.innerHTML += `<div class="chat-msg thinking" id="thinking-${agent}">Thinking...</div>`;
+  msgs.scrollTop  = msgs.scrollHeight;
+
+  try {
+    const data = await fetch('/api/chat/' + agent, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg }),
+    }).then(r => r.json());
+
+    document.getElementById('thinking-' + agent)?.remove();
+    renderMessages(agent, data.messages || []);
+  } catch(e) {
+    document.getElementById('thinking-' + agent).textContent = 'Error: ' + e.message;
+  }
+  btn.disabled = false;
+}
+
+// Enter to send (Shift+Enter for newline)
+document.querySelectorAll('.chat-input').forEach(el => {
+  const agent = el.id.replace('input-', '');
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(agent); }
+  });
+});
+
+// ── Pipeline run ───────────────────────────────────────────────────────────────
+async function triggerRun() {
+  if (!confirm('Start a pipeline run now?')) return;
+  const btn = document.getElementById('btn-run');
+  btn.disabled = true;
+  btn.textContent = 'Starting...';
+  try {
+    const data = await fetch('/api/pipeline/run', { method: 'POST' }).then(r => r.json());
+    if (data.success) {
+      btn.textContent = '⏳ Running...';
+    } else {
+      alert('Error: ' + data.error);
+      btn.disabled = false;
+      btn.textContent = '▶ Run Pipeline Now';
+    }
+  } catch(e) {
+    alert('Failed to start: ' + e.message);
+    btn.disabled = false;
+    btn.textContent = '▶ Run Pipeline Now';
+  }
+}
+
+// ── Modal close on overlay click ──────────────────────────────────────────────
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+// ── Utilities ─────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Auto-poll ─────────────────────────────────────────────────────────────────
+function startPoll() {
+  loadStatus();
+  loadQueue();
+  loadPublished();
+  loadQuarantine();
+  setInterval(() => {
+    loadStatus();
+    if (activeTab !== 'agents') refreshTab(activeTab);
+  }, 5000);
+}
+
+startPoll();
+</script>
+</body>
+</html>
