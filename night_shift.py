@@ -20,6 +20,8 @@ import datetime
 import subprocess
 from pathlib import Path
 
+from typing import Optional
+
 # ─── Configuration ────────────────────────────────────────────────────────────
 
 MAX_REVISIONS = 3
@@ -152,7 +154,7 @@ def parse_json_from_llm_response(raw_response: str) -> dict:
 
 # ─── Keyword queue ─────────────────────────────────────────────────────────────
 
-def get_next_keyword() -> dict | None:
+def get_next_keyword() -> Optional[dict]:
     """
     Pull the next PENDING keyword from keyword-queue.md.
     Format expected in the file:
@@ -201,7 +203,7 @@ def write_article(
     location: str,
     article_template: str,
     writer_system_prompt: str,
-    combined_revision_notes: list | None = None,
+    combined_revision_notes: Optional[list] = None,
     revision_number: int = 0,
 ) -> str:
     """
@@ -307,6 +309,63 @@ Return ONLY valid JSON — no markdown, no explanation, just the JSON object.
     return parse_json_from_llm_response(raw_response)
 
 
+# ─── Article Cleaning ─────────────────────────────────────────────────────────
+
+def clean_article_content(article_content: str, keyword: str, category: str) -> str:
+    """Clean and fix article content: remove thinking process, add proper frontmatter."""
+    import re
+    from datetime import date
+
+    current_date = date.today().isoformat()
+    url_slug = keyword.lower().replace(" ", "-").replace(",", "")
+
+    # Check if article already has frontmatter
+    if article_content.startswith("---") and "---" in article_content[3:100]:
+        return article_content
+
+    # Remove thinking process and internal notes at the beginning
+    lines = article_content.split('\n')
+    content_start = 0
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped and not stripped.startswith('Thinking Process:') and not stripped.startswith('Revision') and not stripped.startswith('**'):
+            content_start = i
+            break
+
+    # Extract the actual article content
+    actual_content = '\n'.join(lines[content_start:])
+
+    # Remove common LLM preamble patterns
+    patterns_to_remove = [
+        r'Thinking Process:.*?(?=\n\n|--\n)',
+        r'^\*\*[A-Z][^*]*\*\*:.*?(?=\n\n|--\n)',
+        r'^\n*\s*---\s*\n',
+    ]
+    for pattern in patterns_to_remove:
+        actual_content = re.sub(pattern, '', actual_content, flags=re.DOTALL)
+
+    # Build proper frontmatter
+    title = keyword.title()
+    frontmatter = f"""---
+title: "{title}"
+description: "Complete guide to {keyword.lower()} in Florida including average prices, material choices, and local factors."
+date: {current_date}
+categories:
+  - {category}
+tags:
+  - {category}
+  - Florida
+  - 2026
+---
+
+"""
+
+    # Remove any existing double newlines at start of content
+    actual_content = actual_content.lstrip('\n')
+
+    return frontmatter + actual_content
+
+
 # ─── Publish ───────────────────────────────────────────────────────────────────
 
 def publish_article(
@@ -327,8 +386,11 @@ def publish_article(
     # Ensure category directory exists
     article_filepath.parent.mkdir(parents=True, exist_ok=True)
 
+    # Clean and fix article content (remove thinking process, add frontmatter)
+    clean_content = clean_article_content(article_content, keyword, category)
+
     # Write the article file
-    article_filepath.write_text(article_content)
+    article_filepath.write_text(clean_content)
 
     # Git commit and push
     subprocess.run(["git", "add", str(article_filepath)], cwd=REPO_PATH, check=True)
