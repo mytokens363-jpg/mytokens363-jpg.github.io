@@ -351,15 +351,43 @@ def clean_article_content(article_content: str, keyword: str, category: str) -> 
     # Extract the actual article content
     actual_content = '\n'.join(lines[content_start:])
 
-    # Remove any remaining thinking process patterns (numbered steps, section headers)
-    patterns_to_remove = [
-        r'^\d+\.\s+.*?:(\s*\n\s*[-*].*?)*',  # Numbered sections like "1. Analyze:"
-        r'^\*\*[A-Z][^*]*\*\*:.*?(?=\n\n|\n\*|\n---|\n#)',  # Bold headers like "**Analyzing Request:**"
-        r'^\s*---\s*\n',  # Standalone --- lines
-        r'Thinking Process:.*?(?=\n\n|--\n)',  # Thinking process blocks
-    ]
-    for pattern in patterns_to_remove:
-        actual_content = re.sub(pattern, '', actual_content, flags=re.MULTILINE | re.DOTALL)
+    # Remove any remaining thinking process (numbered steps and their bullets)
+    # Strategy: Find lines starting with \d+\. and all subsequent bullet points until blank line
+    def remove_thinking_process(text: str) -> str:
+        """Remove numbered step headers and their bullet point lists."""
+        lines = text.split('\n')
+        result_lines = []
+        in_thinking_section = False
+        
+        for line in lines:
+            stripped = line.strip()
+            
+            # Check if this is a numbered section header (e.g., "1.  **Analyze:")
+            if re.match(r'^\d+\.\s+', stripped) and stripped.endswith(':'):
+                in_thinking_section = True
+                continue
+            
+            # Check if this is a bullet point under a thinking section
+            if in_thinking_section and (stripped.startswith('*') or stripped.startswith('-')):
+                continue
+            
+            # Empty line after thinking section content - end the section
+            if in_thinking_section and not stripped:
+                in_thinking_section = False
+                continue
+            
+            # Any other non-empty line ends thinking section mode
+            if in_thinking_section:
+                in_thinking_section = False
+            
+            result_lines.append(line)
+        
+        return '\n'.join(result_lines)
+
+    actual_content = remove_thinking_process(actual_content)
+
+    # Remove any standalone --- lines that might have been left over
+    actual_content = re.sub(r'^\s*---\s*$', '', actual_content, flags=re.MULTILINE)
 
     # Build proper frontmatter (new format)
     title = keyword.title()
