@@ -12,16 +12,16 @@ STATUS values:
 
 ## Queue
 
-- PENDING | cost to replace roof fort lauderdale 2026 | roofing | Fort Lauderdale
-- PENDING | cost to install hurricane impact windows miami 2026 | hurricane-protection | Miami
-- PENDING | cost to replace hvac system orlando 2026 | hvac | Orlando
-- PENDING | cost to install solar panels tampa 2026 | major-systems | Tampa
-- PENDING | cost to repipe house florida 2026 | plumbing | Florida
-- PENDING | cost to install pool cage naples 2026 | pool | Naples
-- PENDING | cost to paint house exterior florida 2026 | exterior | Florida
-- PENDING | cost to remodel kitchen jacksonville 2026 | interior | Jacksonville
-- PENDING | cost to install whole house generator florida 2026 | electrical | Florida
-- PENDING | cost to replace windows fort lauderdale 2026 | exterior | Fort Lauderdale
+- QUARANTINED | cost to replace roof fort lauderdale 2026 | roofing | Fort Lauderdale
+- IN_PROGRESS | cost to install hurricane impact windows miami 2026 | hurricane-protection | Miami
+- PUBLISHED | cost to replace hvac system orlando 2026 | hvac | Orlando
+- PUBLISHED | cost to install solar panels tampa 2026 | major-systems | Tampa
+- IN_PROGRESS | cost to repipe house florida 2026 | plumbing | Florida
+- PUBLISHED | cost to install pool cage naples 2026 | pool | Naples
+- QUARANTINED | cost to paint house exterior florida 2026 | exterior | Florida
+- PUBLISHED | cost to remodel kitchen jacksonville 2026 | interior | Jacksonville
+- PUBLISHED | cost to install whole house generator florida 2026 | electrical | Florida
+- QUARANTINED | cost to replace windows fort lauderdale 2026 | exterior | Fort Lauderdale
 
 ## Published
 

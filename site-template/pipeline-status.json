@@ -1,0 +1,56 @@
+{
+  "run_active": false,
+  "run_started": "2026-04-02T20:40:16.847103",
+  "articles_target": 5,
+  "articles_done": 5,
+  "current_article": null,
+  "results": [
+    {
+      "keyword": "cost to replace hvac system orlando 2026",
+      "status": "PUBLISHED",
+      "revisions": 0
+    },
+    {
+      "keyword": "cost to install solar panels tampa 2026",
+      "status": "PUBLISHED",
+      "revisions": 0
+    },
+    {
+      "keyword": "cost to install pool cage naples 2026",
+      "status": "PUBLISHED",
+      "revisions": 0
+    },
+    {
+      "keyword": "cost to paint house exterior florida 2026",
+      "status": "QUARANTINED",
+      "revisions": 0
+    },
+    {
+      "keyword": "cost to replace windows fort lauderdale 2026",
+      "status": "QUARANTINED",
+      "revisions": 0
+    }
+  ],
+  "writer": {
+    "state": "waiting",
+    "keyword": null,
+    "detail": null,
+    "score": null,
+    "verdict": null
+  },
+  "editor": {
+    "state": "waiting",
+    "keyword": null,
+    "detail": null,
+    "score": null,
+    "verdict": null
+  },
+  "seo": {
+    "state": "waiting",
+    "keyword": null,
+    "detail": null,
+    "score": null,
+    "verdict": null
+  },
+  "last_updated": "2026-04-02T21:41:59.951372"
+}
