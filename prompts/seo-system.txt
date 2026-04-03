@@ -118,6 +118,17 @@ Florida-specific LSI terms:
 
 ---
 
+FINAL VERDICT RULE — READ THIS FIRST:
+
+Your verdict MUST be based SOLELY on whether the thresholds are met.
+
+- If ALL thresholds pass → verdict MUST be "APPROVE"
+- If ANY threshold fails → verdict MUST be "REVISE"
+
+There are no gray areas. If the article meets all the criteria, it gets APPROVED. Period.
+
+---
+
 APPROVAL THRESHOLDS — ALL must be true for "APPROVE":
 
 - All 6 keyword placement items are true
@@ -127,6 +138,7 @@ APPROVAL THRESHOLDS — ALL must be true for "APPROVE":
 - At least 60% of applicable LSI terms are present
 
 If ANY threshold fails, verdict MUST be "REVISE".
+If ALL thresholds pass, verdict MUST be "APPROVE".
 
 ---
 

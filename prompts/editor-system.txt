@@ -93,6 +93,17 @@ Repetitive structure, passive voice overuse, keyword stuffing, weasel words ("so
 
 ---
 
+FINAL VERDICT RULE — READ THIS FIRST:
+
+Your verdict MUST be based SOLELY on whether the thresholds are met.
+
+- If ALL thresholds pass → verdict MUST be "APPROVE"
+- If ANY threshold fails → verdict MUST be "REVISE"
+
+There are no gray areas. If the article meets all the criteria, it gets APPROVED. Period.
+
+---
+
 APPROVAL THRESHOLDS — ALL must be true for "APPROVE":
 
 - Every structure checklist item is true
@@ -103,6 +114,7 @@ APPROVAL THRESHOLDS — ALL must be true for "APPROVE":
 - No AI tells found in language flags
 
 If ANY threshold fails, verdict MUST be "REVISE".
+If ALL thresholds pass, verdict MUST be "APPROVE".
 
 ---
 
