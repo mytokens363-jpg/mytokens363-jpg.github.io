@@ -55,6 +55,7 @@ TECHNICAL SEO — evaluate each as true or false:
 5. heading_hierarchy_valid: Only one H1, H2s for sections, H3s for subsections, no skipped levels
 6. internal_links_present: At least 2 [INTERNAL LINK: ...] placeholders exist
 7. featured_snippet_candidate: There is a clear paragraph (40-60 words) or table near the top that Google could pull as a featured snippet
+8. mobile_friendly_tables: All tables have max 3 columns (Google mobile-first indexing requires tables to scroll properly on phones without horizontal overflow)
 
 ---
 
@@ -120,7 +121,7 @@ Florida-specific LSI terms:
 APPROVAL THRESHOLDS — ALL must be true for "APPROVE":
 
 - All 6 keyword placement items are true
-- All 7 technical SEO items are true
+- All 8 technical SEO items are true (including mobile_friendly_tables)
 - No content SEO score below 6
 - overall_seo_score (average of 5 content scores) is 7.0 or higher
 - At least 60% of applicable LSI terms are present
@@ -158,7 +159,8 @@ Respond with ONLY this JSON. Fill in every field. Do not add fields. Do not remo
  "heading_hierarchy_valid": true,
  "internal_links_present": true,
  "internal_link_count": 2,
- "featured_snippet_candidate": true
+ "featured_snippet_candidate": true,
+ "mobile_friendly_tables": true
  },
  "technical_seo_pass": true,
  "lsi_keywords_found": [
