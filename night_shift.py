@@ -317,28 +317,49 @@ def clean_article_content(article_content: str, keyword: str, category: str) -> 
     from datetime import date
 
     current_date = date.today().isoformat()
-    url_slug = keyword.lower().replace(" ", "-").replace(",", "")
-
-    # Check if article already has frontmatter
-    if article_content.startswith("---") and "---" in article_content[3:100]:
-        return article_content
 
     # Remove thinking process and internal notes at the beginning
+    # LLM often outputs numbered steps (1., 2., etc.) or headers (Analyzing..., Deconstructing...)
     lines = article_content.split('\n')
     content_start = 0
+    
+    # Look for where thinking process ends and actual article begins
+    # Common patterns: numbered lists, section headers ending with colon
     for i, line in enumerate(lines):
         stripped = line.strip()
-        if stripped and not stripped.startswith('Thinking Process:') and not stripped.startswith('Revision') and not stripped.startswith('**'):
+        
+        # Skip empty lines at the beginning
+        if not stripped:
+            continue
+        
+        # Stop when we find H1 title (starts with #) or Quick Answer block
+        if stripped.startswith('# ') or stripped.startswith('**Quick Answer**') or stripped.startswith('**Quick Answer**'):
             content_start = i
             break
+        
+        # Also check for numbered section headers that indicate thinking process
+        # Pattern: "1. Analyze...", "2. Deconstruct...", etc.
+        if re.match(r'^\d+\s+\*?[A-Z][^*]*:$', stripped):
+            # This is a thinking process section header, skip it and following bullets
+            content_start = i + 1
+            continue
+        
+        # Skip bullet points (thinking process contains many of these)
+        if stripped.startswith('*') or stripped.startswith('-'):
+            continue
+        
+        # Found actual content start
+        content_start = i
+        break
 
     # Extract the actual article content
     actual_content = '\n'.join(lines[content_start:])
 
-    # Remove common LLM preamble patterns
+    # Remove any remaining thinking process patterns
     patterns_to_remove = [
         r'Thinking Process:.*?(?=\n\n|--\n)',
         r'^\*\*[A-Z][^*]*\*\*:.*?(?=\n\n|--\n)',
+        r'^\d+\s+\*?[A-Z][^*]*:.*?(?=\n\n|--\n)',
         r'^\n*\s*---\s*\n',
     ]
     for pattern in patterns_to_remove:
@@ -363,6 +384,7 @@ tags:
     # Remove any existing double newlines at start of content
     actual_content = actual_content.lstrip('\n')
 
+    # Return with frontmatter prepended
     return frontmatter + actual_content
 
 
