@@ -163,7 +163,7 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PENDING | cost to install solar panels in Orlando 2026 | major-systems | Orlando
 - PENDING | cost to resurface pool in Florida 2026 | pool | Florida
 - PENDING | cost to resurface pool in Miami 2026 | pool | Miami
-- PENDING | cost to resurface pool in Fort Lauderdale 2026 | pool | pool | Fort Lauderdale
+- PENDING | cost to resurface pool in Fort Lauderdale 2026 | pool | Fort Lauderdale
 - PENDING | cost to resurface pool in Tampa 2026 | pool | Tampa
 - PENDING | cost to resurface pool in Sarasota 2026 | pool | Sarasota
 
