@@ -38,7 +38,7 @@ WRITER_MODEL  = "Qwen/Qwen3.5-35B-A3B"
 EDITOR_MODEL  = "Qwen/Qwen3.5-122B"
 SEO_MODEL     = "Qwen/Qwen3.5-122B"
 
-REPO_PATH = Path.home() / "site-repo"
+REPO_PATH = Path.home() / ".openclaw" / "workspace" / "rivet-business" / "site-template"
 QUEUE_FILE = REPO_PATH / "keyword-queue.md"
 PUBLISHING_LOG_FILE = REPO_PATH / "publishing-log.md"
 NIGHT_SHIFT_LOG_FILE = REPO_PATH / "night-shift-log.md"
@@ -77,7 +77,7 @@ def emit_agent(agent: str, state: str, keyword: str = None, detail: str = None, 
     _pipeline_status[agent] = {"state": state, "keyword": keyword, "detail": detail, "score": score, "verdict": verdict}
     emit_status()
 
-PROMPTS_DIR = Path.home() / "rivet-business" / "prompts"
+PROMPTS_DIR = Path.home() / ".openclaw" / "workspace" / "rivet-business" / "prompts"
 
 # ─── Load system prompts ───────────────────────────────────────────────────────
 
