@@ -321,51 +321,47 @@ def clean_article_content(article_content: str, keyword: str, category: str) -> 
     # Remove thinking process and internal notes at the beginning
     # LLM often outputs numbered steps (1., 2., etc.) or headers (Analyzing..., Deconstructing...)
     lines = article_content.split('\n')
+    
+    # Find where actual article content starts
+    # Look for: H1 title (# How Much...), frontmatter (---), or Quick Answer
     content_start = 0
     
-    # Look for where thinking process ends and actual article begins
-    # Common patterns: numbered lists, section headers ending with colon
     for i, line in enumerate(lines):
         stripped = line.strip()
         
-        # Skip empty lines at the beginning
+        # Empty lines - keep looking
         if not stripped:
             continue
         
-        # Stop when we find H1 title (starts with #) or Quick Answer block
-        if stripped.startswith('# ') or stripped.startswith('**Quick Answer**') or stripped.startswith('**Quick Answer**'):
+        # Found frontmatter start
+        if stripped == '---':
             content_start = i
             break
         
-        # Also check for numbered section headers that indicate thinking process
-        # Pattern: "1. Analyze...", "2. Deconstruct...", etc.
-        if re.match(r'^\d+\s+\*?[A-Z][^*]*:$', stripped):
-            # This is a thinking process section header, skip it and following bullets
-            content_start = i + 1
-            continue
+        # Found H1 title (# How Much...)
+        if stripped.startswith('# '):
+            content_start = i
+            break
         
-        # Skip bullet points (thinking process contains many of these)
-        if stripped.startswith('*') or stripped.startswith('-'):
-            continue
-        
-        # Found actual content start
-        content_start = i
-        break
-
+        # Found Quick Answer block
+        if stripped.startswith('**Quick Answer**'):
+            content_start = i
+            break
+    
     # Extract the actual article content
     actual_content = '\n'.join(lines[content_start:])
 
-    # Remove any remaining thinking process patterns
+    # Remove any remaining thinking process patterns (numbered steps, section headers)
     patterns_to_remove = [
-        r'Thinking Process:.*?(?=\n\n|--\n)',
-        r'^\*\*[A-Z][^*]*\*\*:.*?(?=\n\n|--\n)',
-        r'^\d+\s+\*?[A-Z][^*]*:.*?(?=\n\n|--\n)',
-        r'^\n*\s*---\s*\n',
+        r'^\d+\.\s+.*?:(\s*\n\s*[-*].*?)*',  # Numbered sections like "1. Analyze:"
+        r'^\*\*[A-Z][^*]*\*\*:.*?(?=\n\n|\n\*|\n---|\n#)',  # Bold headers like "**Analyzing Request:**"
+        r'^\s*---\s*\n',  # Standalone --- lines
+        r'Thinking Process:.*?(?=\n\n|--\n)',  # Thinking process blocks
     ]
     for pattern in patterns_to_remove:
-        actual_content = re.sub(pattern, '', actual_content, flags=re.DOTALL)
+        actual_content = re.sub(pattern, '', actual_content, flags=re.MULTILINE | re.DOTALL)
 
-    # Build proper frontmatter
+    # Build proper frontmatter (new format)
     title = keyword.title()
     frontmatter = f"""---
 title: "{title}"
@@ -381,7 +377,10 @@ tags:
 
 """
 
-    # Remove any existing double newlines at start of content
+    # Remove any existing frontmatter from the content (old format)
+    actual_content = re.sub(r'^---.*?^---\s*\n', '', actual_content, flags=re.MULTILINE | re.DOTALL)
+
+    # Remove any leading newlines from content
     actual_content = actual_content.lstrip('\n')
 
     # Return with frontmatter prepended
