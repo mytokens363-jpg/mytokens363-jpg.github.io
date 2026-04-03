@@ -1,251 +1,240 @@
-/* Mobile Fixes for Florida Home Costs
-   Handles responsive table scrolling, prevents table crushing,
-   sets proper mobile typography, adds padding, and FAQ spacing.
-*/
+/*
+ * MOBILE-RESPONSIVE OVERRIDES
+ * Add this to your Hugo theme's custom CSS file.
+ *
+ * If your theme supports custom CSS, paste this into:
+ *   - assets/css/custom.css
+ *   - static/css/custom.css
+ *   - Or wherever your theme loads custom styles
+ *
+ * If your theme has no custom CSS hook, create:
+ *   layouts/partials/head-custom.html
+ * and add:
+ *   <link rel="stylesheet" href="/css/mobile-fixes.css">
+ * then put this file at static/css/mobile-fixes.css
+ */
 
-/* Reset base mobile styles */
-@media (max-width: 600px) {
-  html {
-    font-size: 14px;
+/* ============================
+   RESPONSIVE TABLES
+   ============================ */
+
+/* Wrap all tables in a scrollable container */
+.content table,
+.article table,
+.post-content table,
+article table,
+.markdown table,
+main table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Table cells — prevent crushing */
+.content td,
+.content th,
+article td,
+article th,
+main td,
+main th {
+  padding: 0.65rem 0.85rem;
+  white-space: nowrap; /* prevent wrapping inside cells */
+  border: 1px solid #e2e2e2;
+  text-align: left;
+}
+
+/* Allow wrapping on cells that need it (first column, descriptions) */
+.content td:first-child,
+article td:first-child,
+main td:first-child {
+  white-space: normal;
+  min-width: 120px;
+}
+
+/* Header row styling */
+.content th,
+article th,
+main th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+/* Zebra striping for readability */
+.content tr:nth-child(even),
+article tr:nth-child(even),
+main tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* On small screens, let table scroll horizontally */
+@media (max-width: 768px) {
+  .content table,
+  article table,
+  main table {
+    font-size: 0.85rem;
   }
 
+  .content td,
+  .content th,
+  article td,
+  article th,
+  main td,
+  main th {
+    padding: 0.5rem 0.65rem;
+  }
+}
+
+/* ============================
+   RESPONSIVE TYPOGRAPHY
+   ============================ */
+
+/* Body text — comfortable reading on phone */
+@media (max-width: 768px) {
   body {
-    line-height: 1.6;
+    font-size: 16px;        /* prevents iOS zoom on input focus */
+    line-height: 1.7;
   }
 
-  /* Content padding - don't touch screen edges */
-  .page-wrapper,
-  .article-content,
-  .article-body {
-    padding: 16px;
-  }
-
-  /* Responsive table scrolling */
-  .article-body table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border: 0;
-  }
-
-  .article-body th,
-  .article-body td {
-    padding: 10px 8px;
-    white-space: normal;
-    word-wrap: break-word;
-    font-size: 0.9rem;
-    min-width: 100px;
-  }
-
-  /* Typography adjustments */
   h1 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    line-height: 1.25;
   }
 
   h2 {
-    font-size: 1.4rem;
-    margin-top: 1.8rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    line-height: 1.3;
   }
 
   h3 {
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.6rem;
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-
-  /* List spacing */
-  ul,
-  ol {
-    padding-left: 20px;
-    margin-bottom: 1.2rem;
-  }
-
-  li {
-    margin-bottom: 0.4rem;
-    line-height: 1.5;
-  }
-
-  /* FAQ spacing - vertical spacing between questions */
-  .faq-item {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
-  .faq-question {
-    font-weight: 600;
     font-size: 1.1rem;
-    margin-bottom: 0.4rem;
+    line-height: 1.35;
   }
 
-  .faq-answer {
-    margin-left: 0;
-  }
-
-  /* Link styling */
-  a {
-    word-break: break-word;
-  }
-
-  /* Code blocks - wrap long lines */
-  pre,
-  code {
-    font-size: 0.85rem;
-    overflow-x: auto;
-  }
-
-  /* Button/CTA sizing for touch */
-  .btn,
-  .cta-button {
-    padding: 12px 24px;
-    font-size: 1rem;
-    min-height: 44px;
-    display: inline-block;
-  }
-
-  /* Image sizing */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Hide non-essential elements */
-  .sidebar,
-  .widget {
-    display: none;
+  /* Prevent long words from overflowing on narrow screens */
+  p, li, td {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 }
 
-/* Medium mobile (tablets, portrait) */
-@media (min-width: 601px) and (max-width: 900px) {
-  .page-wrapper,
+/* ============================
+   CONTENT WIDTH & SPACING
+   ============================ */
+
+/* Ensure content doesn't touch screen edges */
+@media (max-width: 768px) {
+  .content,
+  .post-content,
   .article-content,
-  .article-body {
-    padding: 20px;
+  article,
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .article-body th,
-  .article-body td {
-    padding: 12px 10px;
-    font-size: 0.95rem;
-  }
-
+  /* Add breathing room between sections */
   h2 {
-    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin-top: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Lists — enough spacing to tap on mobile */
+  ol li,
+  ul li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  /* Bold cost numbers — make them pop on small screens */
+  strong {
+    color: #1a1a1a;
   }
 }
 
-/* Print styles - homeowners print these guides */
-@media print {
-  body {
-    font-size: 12pt;
-    color: #000;
-    background: #fff;
-  }
+/* ============================
+   IMAGES (if added later)
+   ============================ */
 
-  .page-wrapper {
-    max-width: 100%;
-    width: 100%;
-    padding: 0;
-  }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
 
-  /* Hide interactive elements */
-  .sidebar,
-  .widget,
-  .header-nav,
-  .footer,
-  .back-to-top,
-  .share-buttons,
-  .related-articles {
-    display: none !important;
-  }
+/* ============================
+   LINKS — bigger tap targets on mobile
+   ============================ */
 
-  /* Optimize tables for print */
-  table {
-    page-break-inside: auto;
-  }
-
-  tr {
-    page-break-inside: avoid;
-    page-break-after: auto;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  /* Links - show URLs */
+@media (max-width: 768px) {
   a {
-    text-decoration: underline;
-    color: #000;
+    padding: 2px 0;
+    /* Ensures links are easy to tap */
+  }
+}
+
+/* ============================
+   FAQ SECTION — better mobile spacing
+   ============================ */
+
+@media (max-width: 768px) {
+  /* FAQ questions as H3s need clear separation */
+  h3 + p {
+    margin-top: 0.5rem;
   }
 
-  a[href]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.9em;
-    color: #666;
+  /* Extra spacing between FAQ items */
+  h3 {
+    padding-top: 0.5rem;
+    border-top: 1px solid #eee;
   }
 
-  /* Article layout */
-  .article-header {
-    border-bottom: 2px solid #333;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
+  /* First H3 in a section doesn't need top border */
+  h2 + h3 {
+    border-top: none;
+    padding-top: 0;
   }
+}
 
-  .article-body {
-    padding: 0;
-  }
+/* ============================
+   HORIZONTAL RULES
+   ============================ */
 
-  /* Table formatting for print */
-  .article-body table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+hr {
+  border: none;
+  border-top: 1px solid #e2e2e2;
+  margin: 2rem 0;
+}
 
-  .article-body th,
-  .article-body td {
-    border: 1px solid #000;
-    padding: 8px;
-    word-break: break-word;
-  }
+/* ============================
+   PRINT STYLES (bonus — for homeowners who print)
+   ============================ */
 
-  .article-body th {
-    background: #f0f0f0;
-    font-weight: bold;
-  }
-
-  /* FAQ formatting */
-  .faq-item {
-    margin-bottom: 1rem;
+@media print {
+  table {
+    display: table;
+    overflow: visible;
     page-break-inside: avoid;
   }
 
-  .faq-question {
-    font-weight: bold;
-  }
-
-  /* Page breaks */
-  h2 {
+  h2, h3 {
     page-break-after: avoid;
   }
 
-  p {
-    orphans: 3;
-    widows: 3;
-  }
-
-  /* Bottom Line section highlight */
-  .bottom-line {
-    background: #f9f9f9;
-    padding: 1.5rem;
-    border-left: 4px solid #333;
-    margin-top: 2rem;
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
   }
 }
