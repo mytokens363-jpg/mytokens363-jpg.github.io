@@ -1,33 +1,33 @@
 {
   "run_active": false,
-  "run_started": "2026-04-03T00:00:05.957401",
+  "run_started": "2026-04-04T00:00:01.633540",
   "articles_target": 5,
   "articles_done": 5,
   "current_article": null,
   "results": [
     {
-      "keyword": "cost to replace roof in Miami 2026",
-      "status": "QUARANTINED",
-      "revisions": 0
-    },
-    {
-      "keyword": "cost to replace roof in Fort Lauderdale 2026",
-      "status": "QUARANTINED",
-      "revisions": 0
-    },
-    {
-      "keyword": "cost to replace roof in Tampa 2026",
+      "keyword": "cost to replace flat roof in Fort Lauderdale 2026",
       "status": "PUBLISHED",
       "revisions": 0
     },
     {
-      "keyword": "cost to replace roof in Orlando 2026",
-      "status": "QUARANTINED",
+      "keyword": "cost to replace flat roof in Tampa 2026",
+      "status": "PUBLISHED",
       "revisions": 0
     },
     {
-      "keyword": "cost to repair roof in Florida 2026",
-      "status": "QUARANTINED",
+      "keyword": "cost to replace flat roof in Jacksonville 2026",
+      "status": "PUBLISHED",
+      "revisions": 0
+    },
+    {
+      "keyword": "cost of roof inspection in Florida 2026",
+      "status": "PUBLISHED",
+      "revisions": 0
+    },
+    {
+      "keyword": "cost of roof inspection in Miami 2026",
+      "status": "PUBLISHED",
       "revisions": 0
     }
   ],
@@ -52,5 +52,5 @@
     "score": null,
     "verdict": null
   },
-  "last_updated": "2026-04-03T01:41:58.894217"
+  "last_updated": "2026-04-04T00:25:02.035534"
 }

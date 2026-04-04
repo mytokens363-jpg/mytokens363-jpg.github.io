@@ -14,6 +14,13 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 ---
 
 ## Queue
+- IN_PROGRESS | cost to replace roof fort lauderdale 2026 | general | Florida
+- IN_PROGRESS | cost to paint house exterior florida 2026 | general | Florida
+- IN_PROGRESS | cost to replace windows fort lauderdale 2026 | general | Florida
+- IN_PROGRESS | cost to replace roof in Miami 2026 | general | Florida
+- IN_PROGRESS | cost to replace roof in Fort Lauderdale 2026 | general | Florida
+- IN_PROGRESS | cost to replace roof in Orlando 2026 | general | Florida
+- IN_PROGRESS | cost to repair roof in Florida 2026 | general | Florida
 
 ### WEEK 1 — ROOFING
 
@@ -23,27 +30,27 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to replace roof in Tampa 2026 | roofing | Tampa
 - QUARANTINED | cost to replace roof in Orlando 2026 | roofing | Orlando
 - QUARANTINED | cost to repair roof in Florida 2026 | roofing | Florida
-- PENDING | cost to repair roof in Miami 2026 | roofing | Miami
-- PENDING | cost to repair roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
-- PENDING | cost to repair roof in Tampa 2026 | roofing | Tampa
-- PENDING | cost to repair roof in Orlando 2026 | roofing | Orlando
-- PENDING | cost to install metal roof in Florida 2026 | roofing | Florida
-- PENDING | cost to install metal roof in Miami 2026 | roofing | Miami
-- PENDING | cost to install metal roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
-- PENDING | cost to install metal roof in Broward County 2026 | roofing | Broward County
-- PENDING | cost to install metal roof in Palm Beach 2026 | roofing | Palm Beach
-- PENDING | cost to replace tile roof in Florida 2026 | roofing | Florida
-- PENDING | cost to replace tile roof in Miami 2026 | roofing | Miami
-- PENDING | cost to replace tile roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
-- PENDING | cost to replace tile roof in Naples 2026 | roofing | Naples
-- PENDING | cost to replace tile roof in Boca Raton 2026 | roofing | Boca Raton
-- PENDING | cost to replace flat roof in Florida 2026 | roofing | Florida
-- PENDING | cost to replace flat roof in Miami 2026 | roofing | Miami
-- PENDING | cost to replace flat roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
-- PENDING | cost to replace flat roof in Tampa 2026 | roofing | Tampa
-- PENDING | cost to replace flat roof in Jacksonville 2026 | roofing | Jacksonville
-- PENDING | cost of roof inspection in Florida 2026 | roofing | Florida
-- PENDING | cost of roof inspection in Miami 2026 | roofing | Miami
+- IN_PROGRESS | cost to repair roof in Miami 2026 | roofing | Miami
+- IN_PROGRESS | cost to repair roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
+- IN_PROGRESS | cost to repair roof in Tampa 2026 | roofing | Tampa
+- QUARANTINED | cost to repair roof in Orlando 2026 | roofing | Orlando
+- QUARANTINED | cost to install metal roof in Florida 2026 | roofing | Florida
+- IN_PROGRESS | cost to install metal roof in Miami 2026 | roofing | Miami
+- QUARANTINED | cost to install metal roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
+- QUARANTINED | cost to install metal roof in Broward County 2026 | roofing | Broward County
+- IN_PROGRESS | cost to install metal roof in Palm Beach 2026 | roofing | Palm Beach
+- QUARANTINED | cost to replace tile roof in Florida 2026 | roofing | Florida
+- IN_PROGRESS | cost to replace tile roof in Miami 2026 | roofing | Miami
+- PUBLISHED | cost to replace tile roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
+- PUBLISHED | cost to replace tile roof in Naples 2026 | roofing | Naples
+- PUBLISHED | cost to replace tile roof in Boca Raton 2026 | roofing | Boca Raton
+- PUBLISHED | cost to replace flat roof in Florida 2026 | roofing | Florida
+- PUBLISHED | cost to replace flat roof in Miami 2026 | roofing | Miami
+- PUBLISHED | cost to replace flat roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
+- PUBLISHED | cost to replace flat roof in Tampa 2026 | roofing | Tampa
+- PUBLISHED | cost to replace flat roof in Jacksonville 2026 | roofing | Jacksonville
+- PUBLISHED | cost of roof inspection in Florida 2026 | roofing | Florida
+- PUBLISHED | cost of roof inspection in Miami 2026 | roofing | Miami
 - PENDING | cost of roof inspection in Fort Lauderdale 2026 | roofing | Fort Lauderdale
 - PENDING | cost of roof inspection in Tampa 2026 | roofing | Tampa
 - PENDING | cost of roof inspection in Orlando 2026 | roofing | Orlando

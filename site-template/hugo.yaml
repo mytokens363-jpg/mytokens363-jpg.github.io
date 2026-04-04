@@ -28,7 +28,15 @@ taxonomies:
 
 # Permalinks — clean SEO-friendly URLs
 permalinks:
-  posts: "/:sections/:contentbasename/"
+  roofing: "/roofing/:slug/"
+  hurricane-protection: "/hurricane-protection/:slug/"
+  exterior: "/exterior/:slug/"
+  interior: "/interior/:slug/"
+  plumbing: "/plumbing/:slug/"
+  electrical: "/electrical/:slug/"
+  hvac: "/hvac/:slug/"
+  major-systems: "/major-systems/:slug/"
+  pool: "/pool/:slug/"
 
 # Sitemap
 sitemap:
