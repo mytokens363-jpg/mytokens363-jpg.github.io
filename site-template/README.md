@@ -186,3 +186,4 @@ Articles work fine without images. The template gracefully hides the
 hero image section if no `hero_image` is set in front matter.
 Images are nice-to-have, not required for launch.
 Test
+Test 2
