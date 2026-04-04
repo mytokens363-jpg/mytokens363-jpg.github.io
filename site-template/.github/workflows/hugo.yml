@@ -42,9 +42,10 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
 
-      - name: Purge Cloudflare Cache
-        if: always()
-        uses: jakejarvis/cloudflare-purge-action@v1.1.0
-        with:
-          zone: floridahomecosts.com
-          token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # Manual Cloudflare cache purge required - use Cloudflare Dashboard > floridahomecosts.com > Caching > Purge Everything
+      # - name: Purge Cloudflare Cache
+      #   if: always()
+      #   uses: jakejarvis/cloudflare-purge-action@v1.1.0
+      #   with:
+      #     zone: floridahomecosts.com
+      #     token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
