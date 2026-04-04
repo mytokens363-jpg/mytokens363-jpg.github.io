@@ -91,6 +91,8 @@ AI tells: "As an AI", "I don't have access to", "Based on my training data"
 
 Repetitive structure, passive voice overuse, keyword stuffing, weasel words ("some experts say", "studies show" without specifics)
 
+**[INTERNAL LINK: ...] placeholders: Any text matching this pattern is an automatic REVISE. Replace with real markdown links using the pattern: `/CATEGORY/SLUG-2026/`**
+
 ---
 
 FINAL VERDICT RULE — READ THIS FIRST:
