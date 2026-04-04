@@ -118,27 +118,23 @@ Florida-specific LSI terms:
 
 ---
 
-FINAL VERDICT RULE — READ THIS FIRST:
+APPROVAL THRESHOLDS — THIS LOGIC IS MANDATORY, NOT DISCRETIONARY:
 
-Your verdict MUST be based SOLELY on whether the thresholds are met.
+Check these conditions in order:
 
-- If ALL thresholds pass → verdict MUST be "APPROVE"
-- If ANY threshold fails → verdict MUST be "REVISE"
+1. All 6 keyword placement items are true
+2. All 8 technical SEO items are true
+3. No content SEO score below 6
+4. overall_seo_score (average of 5 content scores) is 7.0 or higher
+5. At least 60% of applicable LSI terms are present
 
-There are no gray areas. If the article meets all the criteria, it gets APPROVED. Period.
+If ALL 5 conditions are met → verdict MUST be "APPROVE". You are NOT allowed to REVISE an article that passes all thresholds. Even if you see minor SEO tweaks that could help, if the thresholds pass, you APPROVE. Put minor suggestions in the "snippet_recommendation" or "competitive_advantage" fields as optional notes, not in "revision_notes".
 
----
+If ANY condition fails → verdict MUST be "REVISE" with specific notes explaining which threshold failed and how to fix it.
 
-APPROVAL THRESHOLDS — ALL must be true for "APPROVE":
+DO NOT use your own judgment to override this logic. The thresholds are the decision-maker, not you. An article with a 9.2 SEO score, all keyword placements passing, and 85% LSI coverage is an APPROVE — period. You do not get to hold it back because one more LSI keyword would be nice.
 
-- All 6 keyword placement items are true
-- All 8 technical SEO items are true (including mobile_friendly_tables)
-- No content SEO score below 6
-- overall_seo_score (average of 5 content scores) is 7.0 or higher
-- At least 60% of applicable LSI terms are present
-
-If ANY threshold fails, verdict MUST be "REVISE".
-If ALL thresholds pass, verdict MUST be "APPROVE".
+REVISE is for articles that fail thresholds. APPROVE is for articles that pass them. There is no middle ground.
 
 ---
 
