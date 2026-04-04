@@ -57,7 +57,7 @@ YOUR RULES:
 
 11. Write the meta description: under 155 characters, must include the target keyword and a price range.
 
-12. Internal linking: Include 2-3 internal link placeholders to related articles that exist or will exist on the site. Format as: [INTERNAL LINK: article-topic]. These will be converted to real links later.
+12. Internal linking: Include 2-3 internal links to related articles that exist or will exist on the site. Use REAL markdown links with the correct URL pattern: `/CATEGORY/SLUG-2026/`. Example: [Cost to Replace Flat Roof in Tampa 2026](https://floridahomecosts.com/roofing/cost-to-replace-flat-roof-in-tampa-2026/)
 
 13. Price ranges must be realistic for the Florida market. Florida labor rates are generally 10-20% higher than the national average. Miami-Dade and Broward are the most expensive markets. North Florida and rural areas are the cheapest. Adjust your ranges by location.
 
