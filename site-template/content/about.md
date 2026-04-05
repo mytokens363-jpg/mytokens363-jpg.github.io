@@ -1,6 +1,6 @@
 ---
 title: "About Us"
-description: "Florida Home Costs provides accurate, up-to-date home improvement cost guides for Florida homeowners."
+description: "Florida Home Costs provides accurate home improvement cost guides for Florida homeowners."
 layout: "single"
 date: 2026-04-05
 ---
