@@ -55,6 +55,9 @@
   <!-- Mobile Fixes CSS -->
   <link rel="stylesheet" href="/css/mobile-fixes.css">
 
+  <!-- Custom CSS (includes ad hiding rules) -->
+  <link rel="stylesheet" href="/css/custom.css">
+
   <!-- ======================= -->
   <!-- ADSENSE — PASTE CODE HERE WHEN APPROVED -->
   <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
@@ -63,6 +66,9 @@
   <!-- Hide ads until AdSense is enabled -->
   <style>
     .ad-slot, .ad-header .ad-slot, .ad-sidebar .ad-slot {
+      display: none !important;
+    }
+    .ad-slot-label {
       display: none !important;
     }
   </style>
@@ -756,12 +762,14 @@
   </header>
 
   <!-- ===== AD SLOT: BELOW HEADER ===== -->
+  {{ if .Site.Params.ads_enabled }}
   <div class="ad-header">
     <div class="ad-slot" id="ad-header">
       <!-- ADSENSE AD UNIT — PASTE HORIZONTAL AD CODE HERE -->
       <span class="ad-slot-label">Advertisement</span>
     </div>
   </div>
+  {{ end }}
 
   {{ block "main" . }}{{ end }}
 

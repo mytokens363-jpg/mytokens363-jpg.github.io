@@ -18,11 +18,13 @@
 
 <main>
   <!-- AD SLOT: BELOW HERO -->
+  {{ if .Site.Params.ads_enabled }}
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
     <div class="ad-slot" id="ad-home-top">
       <span class="ad-slot-label">Advertisement</span>
     </div>
   </div>
+  {{ end }}
 
   <div style="max-width: 1200px; margin: 0 auto; padding: 32px 24px;">
 

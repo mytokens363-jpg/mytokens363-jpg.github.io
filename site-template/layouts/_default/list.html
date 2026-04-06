@@ -15,9 +15,11 @@
     </p>
 
     <!-- AD SLOT -->
+    {{ if .Site.Params.ads_enabled }}
     <div class="ad-slot" id="ad-list-top">
       <span class="ad-slot-label">Advertisement</span>
     </div>
+    {{ end }}
 
     <div class="category-grid">
       {{ range .Pages.ByDate.Reverse }}
@@ -37,9 +39,11 @@
     </div>
 
     <!-- AD SLOT -->
+    {{ if .Site.Params.ads_enabled }}
     <div class="ad-slot" id="ad-list-bottom" style="margin-top: 32px;">
       <span class="ad-slot-label">Advertisement</span>
     </div>
+    {{ end }}
 
   </div>
 </main>

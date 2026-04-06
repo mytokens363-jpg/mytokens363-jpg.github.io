@@ -47,6 +47,7 @@ sitemap:
 params:
   description: "Accurate home improvement cost guides for Florida homeowners. Real pricing, local building codes, and contractor advice for every county. Updated 2026."
   author: "Florida Home Costs"
+  ads_enabled: false  # Toggle ads on/off - set to true after AdSense approval
   
 # Output formats — generate sitemap, RSS, and single pages
 outputs:

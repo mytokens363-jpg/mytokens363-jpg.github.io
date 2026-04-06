@@ -39,10 +39,12 @@
       {{ end }}
 
       <!-- AD SLOT: BELOW HERO / ABOVE CONTENT -->
+      {{ if .Site.Params.ads_enabled }}
       <div class="ad-slot" id="ad-above-content">
         <!-- ADSENSE AD UNIT — PASTE IN-ARTICLE AD CODE HERE -->
         <span class="ad-slot-label">Advertisement</span>
       </div>
+      {{ end }}
 
       <!-- Article Body -->
       <div class="article-body">
@@ -50,10 +52,12 @@
       </div>
 
       <!-- AD SLOT: BELOW CONTENT -->
+      {{ if .Site.Params.ads_enabled }}
       <div class="ad-slot" id="ad-below-content">
         <!-- ADSENSE AD UNIT — PASTE IN-ARTICLE AD CODE HERE -->
         <span class="ad-slot-label">Advertisement</span>
       </div>
+      {{ end }}
 
       <!-- Related Articles -->
       {{ $category := .Params.category }}
@@ -90,10 +94,12 @@
       {{ end }}
 
       <!-- AD SLOT: SIDEBAR TOP -->
+      {{ if .Site.Params.ads_enabled }}
       <div class="ad-slot ad-sidebar" id="ad-sidebar-top">
         <!-- ADSENSE AD UNIT — PASTE SIDEBAR AD CODE HERE -->
         <span class="ad-slot-label">Advertisement</span>
       </div>
+      {{ end }}
 
       <!-- Quick Cost Widget -->
       {{ if and .Params.cost_low .Params.cost_high }}
@@ -115,10 +121,12 @@
       </div>
 
       <!-- AD SLOT: SIDEBAR BOTTOM -->
+      {{ if .Site.Params.ads_enabled }}
       <div class="ad-slot ad-sidebar" id="ad-sidebar-bottom">
         <!-- ADSENSE AD UNIT — PASTE SIDEBAR AD CODE HERE -->
         <span class="ad-slot-label">Advertisement</span>
       </div>
+      {{ end }}
 
       <!-- Popular Guides -->
       <div class="sidebar-widget">

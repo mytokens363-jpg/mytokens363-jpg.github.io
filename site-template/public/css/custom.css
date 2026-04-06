@@ -1,0 +1,29 @@
+/*
+ * CUSTOM CSS - Hide Ad Units
+ */
+
+/* Phase 1: Hide empty ad placeholders */
+.ad-unit,
+.ad-placeholder,
+.advertisement,
+.ad-label,
+.ad-slot-label,
+[class*="ad-"],
+[class*="Advertisement"] {
+    display: none !important;
+}
+
+/* Hide ad containers when empty */
+.ad-slot,
+.ad-header,
+.ad-sidebar {
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* Ensure content flows without gaps */
+.page-wrapper {
+    padding-top: 0 !important;
+}
