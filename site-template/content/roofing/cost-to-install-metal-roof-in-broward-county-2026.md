@@ -3,9 +3,9 @@ title: "Cost To Install Metal Roof In Broward County 2026"
 description: "Complete guide to cost to install metal roof in broward county 2026 in Florida including average prices, material choices, and local factors."
 date: 2026-04-05
 categories:
-  - general
+  - roofing
 tags:
-  - general
+  - roofing
   - Florida
   - 2026
 ---

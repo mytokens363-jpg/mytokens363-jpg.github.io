@@ -3,9 +3,9 @@ title: "Cost To Replace Tile Roof In Florida 2026"
 description: "Complete guide to cost to replace tile roof in florida 2026 in Florida including average prices, material choices, and local factors."
 date: 2026-04-05
 categories:
-  - general
+  - roofing
 tags:
-  - general
+  - roofing
   - Florida
   - 2026
 ---

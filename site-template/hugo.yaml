@@ -76,6 +76,12 @@ menu:
     - name: "Pool"
       url: "/pool/"
       weight: 6
+    - name: "Electrical"
+      url: "/electrical/"
+      weight: 7
+    - name: "Major Systems"
+      url: "/major-systems/"
+      weight: 8
     - name: "🔍 Search"
       url: "/search/"
       weight: 99
