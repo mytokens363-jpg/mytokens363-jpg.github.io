@@ -27,3 +27,35 @@
 .page-wrapper {
     padding-top: 0 !important;
 }
+
+/* === TABLE STYLING - Fix Header Color === */
+/* Hugo-generated markdown tables have dark gray headers with white text */
+/* Override to use the site's accent color (#1B6B4A - dark green) */
+
+article table thead {
+    background-color: #1B6B4A !important;
+}
+
+article table thead th {
+    background-color: #1B6B4A !important;
+    color: #FFFFFF !important;
+    border-bottom: 2px solid #134D35 !important;
+}
+
+/* Table rows - alternate colors */
+article table tbody tr:nth-child(even) {
+    background-color: #FAFAF8 !important;
+}
+
+article table tbody tr:nth-child(odd) {
+    background-color: #FFFFFF !important;
+}
+
+article table tbody tr:hover {
+    background-color: #E8F5EE !important;
+}
+
+/* Table borders */
+article table td {
+    border-bottom: 1px solid #E5E5E0 !important;
+}
