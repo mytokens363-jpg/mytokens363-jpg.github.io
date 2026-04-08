@@ -7,7 +7,8 @@
       <nav class="breadcrumbs">
         <a href="/">Home</a>
         <span>›</span>
-        {{ with .Params.category }}
+        {{ $cat := or .Params.category (index .Params.categories 0) }}
+        {{ with $cat }}
         <a href="/{{ . }}/">{{ . | humanize | title }}</a>
         <span>›</span>
         {{ end }}
