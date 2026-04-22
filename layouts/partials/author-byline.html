@@ -1,0 +1,12 @@
+{{ $author := index .Site.Data.authors "marco" }}
+{{ if $author }}
+<div class="author-byline" style="
+ font-size: 0.9rem;
+ color: #666;
+ margin-bottom: 1.5rem;
+ padding-bottom: 0.75rem;
+ border-bottom: 1px solid #eee;
+">
+ Written by <strong style="color: #333;">{{ $author.name }}</strong>, {{ $author.title }}
+</div>
+{{ end }}

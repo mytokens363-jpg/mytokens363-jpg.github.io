@@ -1,24 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Florida Home Costs - 2026 Pricing Guide</title><link>https://floridahomecosts.com/</link><description>Recent content on Florida Home Costs - 2026 Pricing Guide</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 20 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://floridahomecosts.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Test Article</title><link>https://floridahomecosts.com/test-article/</link><pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate><guid>https://floridahomecosts.com/test-article/</guid><description>&lt;p&gt;This is a test article to verify the author bio functionality.&lt;/p&gt;
-&lt;h2 id="cost-breakdown"&gt;Cost Breakdown&lt;/h2&gt;
-&lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;Item&lt;/th&gt;
- &lt;th&gt;Price Range&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;Asphalt Shingles&lt;/td&gt;
- &lt;td&gt;$4 - $5.50/sq ft&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;Architectural&lt;/td&gt;
- &lt;td&gt;$5.50 - $7.50/sq ft&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;Concrete Tile&lt;/td&gt;
- &lt;td&gt;$9 - $14/sq ft&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Florida Home Costs - 2026 Pricing Guide</title>
+    <link>https://floridahomecosts.com/</link>
+    <description>Recent content on Florida Home Costs - 2026 Pricing Guide</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://floridahomecosts.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test Article</title>
+      <link>https://floridahomecosts.com/test-article/</link>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://floridahomecosts.com/test-article/</guid>
+      <description>&lt;p&gt;This is a test article to verify the author bio functionality.&lt;/p&gt;&#xA;&lt;h2 id=&#34;cost-breakdown&#34;&gt;Cost Breakdown&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Item&lt;/th&gt;&#xA;          &lt;th&gt;Price Range&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Asphalt Shingles&lt;/td&gt;&#xA;          &lt;td&gt;$4 - $5.50/sq ft&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Architectural&lt;/td&gt;&#xA;          &lt;td&gt;$5.50 - $7.50/sq ft&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Concrete Tile&lt;/td&gt;&#xA;          &lt;td&gt;$9 - $14/sq ft&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
+    </item>
+  </channel>
+</rss>
