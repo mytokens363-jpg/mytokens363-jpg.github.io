@@ -5,9 +5,9 @@ Runs nightly. Pulls keywords from queue. Orchestrates Writer, Editor,
 and SEO agents via dual LLM routing.
 
 MODEL ROUTING:
-  Writer  → Qwen3.5-35B-A3B  (10.0.0.13:8000) — creative generation, faster
-  Editor  → Qwen3.5-122B     (10.0.0.13:8000) — high-fidelity quality review
-  SEO     → Qwen3.5-122B     (10.0.0.13:8000) — high-fidelity SEO analysis
+  Writer  → Qwen3.5-35B-A3B  (10.0.0.14:8000) — creative generation, faster
+  Editor  → Qwen3.5-122B     (10.0.0.21:8000) — high-fidelity quality review
+  SEO     → Qwen3.5-122B     (10.0.0.21:8000) — high-fidelity SEO analysis
 
 CONSENSUS RULE: Both Editor AND SEO must output "APPROVE".
 If either rejects, their combined revision notes go back to the Writer.
@@ -28,11 +28,11 @@ MAX_REVISIONS = 3
 ARTICLES_PER_NIGHT = 5
 
 # ── Model routing — three separate vLLM endpoints ─────────────────────────────
-# Writer:  10.0.0.13 (Rivet2) — Qwen3.5-35B-A3B (faster, creative generation)
-# Editor:  10.0.0.21 (Rivet3) — Qwen3.5-122B (high-fidelity review)
-# SEO:     10.0.0.21 (Rivet3) — Qwen3.5-122B (high-fidelity review)
+# Writer:  10.0.0.14 (Rivet2) — Qwen3.5-35B-A3B (faster, creative generation)
+# Editor:  10.0.0.21 (Spark)  — Qwen3.5-122B (high-fidelity review)
+# SEO:     10.0.0.21 (Spark)  — Qwen3.5-122B (high-fidelity review)
 
-WRITER_URL  = "http://10.0.0.13:8000/v1/chat/completions"
+WRITER_URL  = "http://10.0.0.14:8000/v1/chat/completions"
 EDITOR_URL  = "http://10.0.0.21:8000/v1/chat/completions"
 SEO_URL     = "http://10.0.0.21:8000/v1/chat/completions"
 
@@ -131,7 +131,7 @@ def call_llm(
         "temperature": temperature,
     }
 
-    api_response = requests.post(url, json=request_payload, timeout=300)
+    api_response = requests.post(url, json=request_payload, timeout=400)
     api_response.raise_for_status()
 
     return api_response.json()["choices"][0]["message"]["content"]
@@ -428,6 +428,59 @@ tags:
 
 # ─── Publish ───────────────────────────────────────────────────────────────────
 
+def generate_article_chart(article_content: str, keyword: str, category: str, location: str) -> Optional[str]:
+    """Extract cost data from article and generate a chart image."""
+    import re
+    import json
+    
+    # Try to find cost data in the article (look for tables or cost ranges)
+    # Pattern: matches lines with dollar amounts and cost ranges
+    cost_items = []
+    lines = article_content.split('\n')
+    
+    # Look for a cost comparison pattern like:
+    # Material | Cost Range
+    # Or specific cost mentions
+    for line in lines:
+        # Match patterns like: "Architectural Shingle: $8,000 - $14,000"
+        match = re.match(r'\*\*?(.+?)\*\*?:?\s*\$([\d,]+)\s*-\s*\$([\d,]+)', line)
+        if not match:
+            match = re.match(r'(.+?)\|\s*\$([\d,]+)\s*-\s*\$([\d,]+)', line)
+        if match:
+            label = match.group(1).strip()
+            low = int(match.group(2).replace(',', ''))
+            high = int(match.group(3).replace(',', ''))
+            cost_items.append({"label": label, "low": low, "high": high})
+    
+    if len(cost_items) < 2:
+        return None
+    
+    # Generate chart via generate_chart.py
+    chart_data = {
+        "title": f"{keyword} Costs",
+        "location": location,
+        "items": cost_items[:6]  # Max 6 items
+    }
+    
+    url_slug = keyword.lower().replace(" ", "-").replace(",", "")
+    json_str = json.dumps(chart_data)
+    
+    chart_script = REPO_PATH / "scripts" / "generate_chart.py"
+    result = subprocess.run(
+        ["python3", str(chart_script), json_str, category, url_slug],
+        capture_output=True, text=True, timeout=30
+    )
+    
+    if result.returncode == 0:
+        # Parse output for file path
+        for line in result.stdout.split('\n'):
+            if 'Chart saved:' in line:
+                chart_path = line.split('Chart saved:')[1].strip()
+                return chart_path
+    
+    return None
+
+
 def publish_article(
     article_content: str,
     keyword: str,
@@ -448,6 +501,17 @@ def publish_article(
 
     # Clean and fix article content (remove thinking process, add frontmatter)
     clean_content = clean_article_content(article_content, keyword, category)
+    
+    # Generate chart if article contains cost data
+    chart_path = generate_article_chart(clean_content, keyword, category, location)
+    
+    # Insert chart into article if generated
+    if chart_path:
+        chart_markdown = f"\n![Cost Chart]({chart_path})\n"
+        # Insert after the first H2 heading
+        match = re.search(r'^## ', clean_content, re.MULTILINE)
+        if match:
+            clean_content = clean_content[:match.start()] + chart_markdown + clean_content[match.start():]
 
     # Write the article file
     article_filepath.write_text(clean_content)

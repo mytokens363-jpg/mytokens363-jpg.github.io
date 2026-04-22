@@ -1,0 +1,38 @@
+{{ $author := index .Site.Data.authors "marco" }}
+{{ if $author }}
+<div class="author-bio" style="
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  margin: 2.5rem 0;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #2563eb;
+">
+  {{ if $author.image }}
+  <img 
+    src="{{ $author.image }}" 
+    alt="{{ $author.name }}"
+    style="
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    "
+  >
+  {{ end }}
+  <div>
+    <div style="font-weight: 600; font-size: 1rem; color: #1a1a1a; margin-bottom: 0.15rem;">
+      {{ $author.name }}
+    </div>
+    <div style="font-size: 0.85rem; color: #2563eb; margin-bottom: 0.6rem;">
+      {{ $author.title }}
+    </div>
+    <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin: 0;">
+      {{ $author.bio }}
+    </p>
+  </div>
+</div>
+{{ end }}

@@ -47,10 +47,16 @@
       </div>
       {{ end }}
 
+      <!-- Author Bio -->
+      {{ partial "author-bio.html" . }}
+
       <!-- Article Body -->
       <div class="article-body">
         {{ .Content }}
       </div>
+
+      <!-- Author Bio (bottom) -->
+      {{ partial "author-bio.html" . }}
 
       <!-- AD SLOT: BELOW CONTENT -->
       {{ if .Site.Params.ads_enabled }}

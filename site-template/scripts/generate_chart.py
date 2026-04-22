@@ -41,7 +41,7 @@ def generate_cost_chart(data: dict, category: str, slug: str) -> str:
     import matplotlib.pyplot as plt
     import matplotlib.ticker as ticker
     
-    REPO_PATH = Path.home() / "site-repo"
+    REPO_PATH = Path.home() / ".openclaw" / "workspace" / "rivet-business" / "site-template"
     IMAGES_DIR = REPO_PATH / "static" / "images" / category
     IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     
