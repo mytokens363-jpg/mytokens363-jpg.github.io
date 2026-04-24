@@ -123,3 +123,24 @@
 | 2026-04-21 00:10 | cost to paint house exterior in Tampa 2026 | cost-to-paint-house-exterior-in-tampa-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
 | 2026-04-21 00:15 | cost to paint house exterior in Jacksonville 2026 | cost-to-paint-house-exterior-in-jacksonville-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
 | 2026-04-21 00:16 | cost to install fence in Florida 2026 | cost-to-install-fence-in-florida-2026-2026.md | Editor: 9.2 | SEO: 8.6 | PUBLISHED |
+| 2026-04-21 23:50 | cost to install fence in Miami 2026 | cost-to-install-fence-in-miami-2026-2026.md | Editor: 8.3 | SEO: 8.6 | PUBLISHED |
+| 2026-04-21 23:51 | cost to install fence in Fort Lauderdale 2026 | cost-to-install-fence-in-fort-lauderdale-2026-2026.md | Editor: 8.5 | SEO: 9.2 | PUBLISHED |
+| 2026-04-21 23:55 | cost to install fence in Tampa 2026 | cost-to-install-fence-in-tampa-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
+| 2026-04-22 00:04 | cost to pave driveway in Broward County 2026 | cost-to-pave-driveway-in-broward-county-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
+| 2026-04-22 00:14 | cost of pressure washing in Tampa 2026 | cost-of-pressure-washing-in-tampa-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
+| 2026-04-22 00:24 | cost of tree removal in Florida 2026 | cost-of-tree-removal-in-florida-2026-2026.md | Editor: 8.2 | SEO: 8.0 | PUBLISHED |
+| 2026-04-22 00:29 | cost of tree removal in Miami 2026 | cost-of-tree-removal-in-miami-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
+| 2026-04-22 00:37 | cost of tree removal in Fort Lauderdale 2026 | cost-of-tree-removal-in-fort-lauderdale-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
+| 2026-04-22 23:54 | cost of tree removal in Tampa 2026 | cost-of-tree-removal-in-tampa-2026-2026.md | Editor: 8.2 | SEO: 8.4 | PUBLISHED |
+| 2026-04-22 23:54 | cost to install sod in Florida 2026 | cost-to-install-sod-in-florida-2026-2026.md | Editor: 8.5 | SEO: 8.8 | PUBLISHED |
+| 2026-04-22 23:59 | cost to install sod in Orlando 2026 | cost-to-install-sod-in-orlando-2026-2026.md | Editor: 8.5 | SEO: 8.6 | PUBLISHED |
+| 2026-04-23 00:00 | cost to remodel kitchen in Florida 2026 | cost-to-remodel-kitchen-in-florida-2026-2026.md | Editor: 8.5 | SEO: 8.0 | PUBLISHED |
+| 2026-04-23 00:04 | cost to replace water heater in Fort Lauderdale 2026 | cost-to-replace-water-heater-in-fort-lauderdale-2026-2026.md | Editor: 9.2 | SEO: 8.6 | PUBLISHED |
+| 2026-04-23 00:11 | cost to replace water heater in Tampa 2026 | cost-to-replace-water-heater-in-tampa-2026-2026.md | Editor: 8.3 | SEO: 8.0 | PUBLISHED |
+| 2026-04-23 00:18 | cost to install solar panels in Orlando 2026 | cost-to-install-solar-panels-in-orlando-2026-2026.md | Editor: 8.3 | SEO: 9.0 | PUBLISHED |
+| 2026-04-23 00:22 | cost to resurface pool in Miami 2026 | cost-to-resurface-pool-in-miami-2026-2026.md | Editor: 8.5 | SEO: 8.8 | PUBLISHED |
+| 2026-04-24 13:47 | cost to replace roof in Fort Lauderdale 2026 | cost-to-replace-roof-in-fort-lauderdale-2026-2026.md | Editor: 9.2 | SEO: 9.2 | PUBLISHED |
+| 2026-04-24 13:57 | cost to install metal roof in Miami 2026 | cost-to-install-metal-roof-in-miami-2026-2026.md | Editor: 8.3 | SEO: 9.0 | PUBLISHED |
+| 2026-04-24 14:02 | cost to install storm panels in Miami 2026 | cost-to-install-storm-panels-in-miami-2026-2026.md | Editor: 8.3 | SEO: 9.0 | PUBLISHED |
+| 2026-04-24 14:09 | cost to install storm panels in Sarasota 2026 | cost-to-install-storm-panels-in-sarasota-2026-2026.md | Editor: 8.5 | SEO: 9.0 | PUBLISHED |
+| 2026-04-24 14:19 | cost to pave driveway in Miami 2026 | cost-to-pave-driveway-in-miami-2026-2026.md | Editor: 8.5 | SEO: 8.8 | PUBLISHED |

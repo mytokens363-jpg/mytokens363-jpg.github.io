@@ -23,7 +23,7 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to paint house exterior florida 2026 | general | Florida
 - PUBLISHED | cost to replace windows fort lauderdale 2026 | general | Florida
 - PUBLISHED | cost to replace roof in Miami 2026 | general | Florida
-- IN_PROGRESS | cost to replace roof in Fort Lauderdale 2026 | general | Florida
+- PUBLISHED | cost to replace roof in Fort Lauderdale 2026 | general | Florida
 - PUBLISHED | cost to replace roof in Orlando 2026 | general | Florida
 - PUBLISHED | cost to repair roof in Florida 2026 | general | Florida
 
@@ -40,7 +40,7 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to repair roof in Tampa 2026 | roofing | Tampa
 - QUARANTINED | cost to repair roof in Orlando 2026 | roofing | Orlando
 - QUARANTINED | cost to install metal roof in Florida 2026 | roofing | Florida
-- IN_PROGRESS | cost to install metal roof in Miami 2026 | roofing | Miami
+- PUBLISHED | cost to install metal roof in Miami 2026 | roofing | Miami
 - QUARANTINED | cost to install metal roof in Fort Lauderdale 2026 | roofing | Fort Lauderdale
 - QUARANTINED | cost to install metal roof in Broward County 2026 | roofing | Broward County
 - PUBLISHED | cost to install metal roof in Palm Beach 2026 | roofing | Palm Beach
@@ -98,10 +98,10 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to install roof straps in Broward County 2026 | hurricane-protection | Broward County
 - PUBLISHED | cost to install roof straps in Palm Beach 2026 | hurricane-protection | Palm Beach
 - PUBLISHED | cost to install storm panels in Florida 2026 | hurricane-protection | Florida
-- IN_PROGRESS | cost to install storm panels in Miami 2026 | hurricane-protection | Miami
+- PUBLISHED | cost to install storm panels in Miami 2026 | hurricane-protection | Miami
 - PUBLISHED | cost to install storm panels in Fort Lauderdale 2026 | hurricane-protection | Fort Lauderdale
 - PUBLISHED | cost to install storm panels in Tampa 2026 | hurricane-protection | Tampa
-- IN_PROGRESS | cost to install storm panels in Sarasota 2026 | hurricane-protection | Sarasota
+- PUBLISHED | cost to install storm panels in Sarasota 2026 | hurricane-protection | Sarasota
 
 ### WEEK 3 — EXTERIOR
 
@@ -116,34 +116,34 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to paint house exterior in Tampa 2026 | exterior | Tampa
 - PUBLISHED | cost to paint house exterior in Jacksonville 2026 | exterior | Jacksonville
 - PUBLISHED | cost to install fence in Florida 2026 | exterior | Florida
-- PENDING | cost to install fence in Miami 2026 | exterior | Miami
-- PENDING | cost to install fence in Fort Lauderdale 2026 | exterior | Fort Lauderdale
-- PENDING | cost to install fence in Tampa 2026 | exterior | Tampa
+- PUBLISHED | cost to install fence in Miami 2026 | exterior | Miami
+- PUBLISHED | cost to install fence in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PUBLISHED | cost to install fence in Tampa 2026 | exterior | Tampa
 - PUBLISHED | cost to install fence in Orlando 2026 | exterior | Orlando
 - PUBLISHED | cost to pave driveway in Florida 2026 | exterior | Florida
-- PENDING | cost to pave driveway in Miami 2026 | exterior | Miami
+- PUBLISHED | cost to pave driveway in Miami 2026 | exterior | Miami
 - PUBLISHED | cost to pave driveway in Fort Lauderdale 2026 | exterior | Fort Lauderdale
-- PENDING | cost to pave driveway in Broward County 2026 | exterior | Broward County
+- PUBLISHED | cost to pave driveway in Broward County 2026 | exterior | Broward County
 - PUBLISHED | cost to pave driveway in Palm Beach 2026 | exterior | Palm Beach
 - PUBLISHED | cost of pressure washing in Florida 2026 | exterior | Florida
 - PUBLISHED | cost of pressure washing in Miami 2026 | exterior | Miami
 - PENDING | cost of pressure washing in Fort Lauderdale 2026 | exterior | Fort Lauderdale
-- PENDING | cost of pressure washing in Tampa 2026 | exterior | Tampa
+- PUBLISHED | cost of pressure washing in Tampa 2026 | exterior | Tampa
 - PUBLISHED | cost of pressure washing in Orlando 2026 | exterior | Orlando
-- PENDING | cost of tree removal in Florida 2026 | exterior | Florida
-- PENDING | cost of tree removal in Miami 2026 | exterior | Miami
-- PENDING | cost of tree removal in Fort Lauderdale 2026 | exterior | Fort Lauderdale
-- PENDING | cost of tree removal in Tampa 2026 | exterior | Tampa
+- PUBLISHED | cost of tree removal in Florida 2026 | exterior | Florida
+- PUBLISHED | cost of tree removal in Miami 2026 | exterior | Miami
+- PUBLISHED | cost of tree removal in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PUBLISHED | cost of tree removal in Tampa 2026 | exterior | Tampa
 - PUBLISHED | cost of tree removal in Jacksonville 2026 | exterior | Jacksonville
-- PENDING | cost to install sod in Florida 2026 | exterior | Florida
+- PUBLISHED | cost to install sod in Florida 2026 | exterior | Florida
 - PUBLISHED | cost to install sod in Miami 2026 | exterior | Miami
 - PUBLISHED | cost to install sod in Fort Lauderdale 2026 | exterior | Fort Lauderdale
 - PUBLISHED | cost to install sod in Tampa 2026 | exterior | Tampa
-- PENDING | cost to install sod in Orlando 2026 | exterior | Orlando
+- PUBLISHED | cost to install sod in Orlando 2026 | exterior | Orlando
 
 ### WEEK 4 — INTERIOR + SYSTEMS
 
-- PENDING | cost to remodel kitchen in Florida 2026 | interior | Florida
+- PUBLISHED | cost to remodel kitchen in Florida 2026 | interior | Florida
 - PUBLISHED | cost to remodel kitchen in Miami 2026 | interior | Miami
 - PUBLISHED | cost to remodel kitchen in Fort Lauderdale 2026 | interior | Fort Lauderdale
 - PUBLISHED | cost to remodel kitchen in Tampa 2026 | interior | Tampa
@@ -165,16 +165,16 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to upgrade electrical panel in Orlando 2026 | electrical | Orlando
 - PUBLISHED | cost to replace water heater in Florida 2026 | plumbing | Florida
 - PUBLISHED | cost to replace water heater in Miami 2026 | plumbing | Miami
-- PENDING | cost to replace water heater in Fort Lauderdale 2026 | plumbing | Fort Lauderdale
-- PENDING | cost to replace water heater in Tampa 2026 | plumbing | Tampa
+- PUBLISHED | cost to replace water heater in Fort Lauderdale 2026 | plumbing | Fort Lauderdale
+- PUBLISHED | cost to replace water heater in Tampa 2026 | plumbing | Tampa
 - PUBLISHED | cost to replace water heater in Orlando 2026 | plumbing | Orlando
 - PUBLISHED | cost to install solar panels in Florida 2026 | major-systems | Florida
 - PENDING | cost to install solar panels in Miami 2026 | major-systems | Miami
 - PUBLISHED | cost to install solar panels in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
 - PUBLISHED | cost to install solar panels in Tampa 2026 | major-systems | Tampa
-- PENDING | cost to install solar panels in Orlando 2026 | major-systems | Orlando
+- PUBLISHED | cost to install solar panels in Orlando 2026 | major-systems | Orlando
 - PUBLISHED | cost to resurface pool in Florida 2026 | pool | Florida
-- PENDING | cost to resurface pool in Miami 2026 | pool | Miami
+- PUBLISHED | cost to resurface pool in Miami 2026 | pool | Miami
 - PUBLISHED | cost to resurface pool in Fort Lauderdale 2026 | pool | Fort Lauderdale
 - PUBLISHED | cost to resurface pool in Tampa 2026 | pool | Tampa
 - PUBLISHED | cost to resurface pool in Sarasota 2026 | pool | Sarasota

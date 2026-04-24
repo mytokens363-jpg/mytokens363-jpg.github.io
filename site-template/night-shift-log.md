@@ -411,3 +411,73 @@
 - Total processed: 5
 
 ---
+
+## Night Shift Report — 2026-04-21
+
+- Duration: 0:39:41.752653
+- Published: 5
+- Quarantined: 0
+- Errors: 0
+- Total processed: 5
+
+---
+
+## Night Shift Report — 2026-04-21
+
+- Duration: 0:52:39.520239
+- Published: 3
+- Quarantined: 0
+- Errors: 2
+- Total processed: 5
+
+---
+
+## Night Shift Report — 2026-04-22
+
+- Duration: 0:33:42.112444
+- Published: 4
+- Quarantined: 0
+- Errors: 0
+- Total processed: 4
+
+---
+
+## Night Shift Report — 2026-04-22
+
+- Duration: 0:37:09.877895
+- Published: 4
+- Quarantined: 0
+- Errors: 1
+- Total processed: 5
+
+---
+
+## Night Shift Report — 2026-04-23
+
+- Duration: 0:00:01.143155
+- Published: 0
+- Quarantined: 0
+- Errors: 0
+- Total processed: 0
+
+---
+
+## Night Shift Report — 2026-04-23
+
+- Duration: 0:00:00.970919
+- Published: 0
+- Quarantined: 0
+- Errors: 0
+- Total processed: 0
+
+---
+
+## Night Shift Report — 2026-04-24
+
+- Duration: 0:37:19.752048
+- Published: 5
+- Quarantined: 0
+- Errors: 0
+- Total processed: 5
+
+---
