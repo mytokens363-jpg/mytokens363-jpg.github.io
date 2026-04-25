@@ -127,7 +127,7 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to pave driveway in Palm Beach 2026 | exterior | Palm Beach
 - PUBLISHED | cost of pressure washing in Florida 2026 | exterior | Florida
 - PUBLISHED | cost of pressure washing in Miami 2026 | exterior | Miami
-- PENDING | cost of pressure washing in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PUBLISHED | cost of pressure washing in Fort Lauderdale 2026 | exterior | Fort Lauderdale
 - PUBLISHED | cost of pressure washing in Tampa 2026 | exterior | Tampa
 - PUBLISHED | cost of pressure washing in Orlando 2026 | exterior | Orlando
 - PUBLISHED | cost of tree removal in Florida 2026 | exterior | Florida
@@ -169,7 +169,7 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 - PUBLISHED | cost to replace water heater in Tampa 2026 | plumbing | Tampa
 - PUBLISHED | cost to replace water heater in Orlando 2026 | plumbing | Orlando
 - PUBLISHED | cost to install solar panels in Florida 2026 | major-systems | Florida
-- PENDING | cost to install solar panels in Miami 2026 | major-systems | Miami
+- PUBLISHED | cost to install solar panels in Miami 2026 | major-systems | Miami
 - PUBLISHED | cost to install solar panels in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
 - PUBLISHED | cost to install solar panels in Tampa 2026 | major-systems | Tampa
 - PUBLISHED | cost to install solar panels in Orlando 2026 | major-systems | Orlando
@@ -181,6 +181,184 @@ Do NOT generate your own keywords. Process top to bottom, no skipping.
 
 ---
 
+- PENDING | cost to install tile flooring in Florida 2026 | interior | Florida
+- PENDING | cost to install tile flooring in Miami 2026 | interior | Miami
+- PENDING | cost to install tile flooring in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to install tile flooring in Tampa 2026 | interior | Tampa
+- PENDING | cost to install tile flooring in Orlando 2026 | interior | Orlando
+- PENDING | cost to install vinyl plank flooring in Florida 2026 | interior | Florida
+- PENDING | cost to install vinyl plank flooring in Miami 2026 | interior | Miami
+- PENDING | cost to install vinyl plank flooring in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to install vinyl plank flooring in Tampa 2026 | interior | Tampa
+- PENDING | cost to install vinyl plank flooring in Orlando 2026 | interior | Orlando
+- PENDING | cost to replace kitchen cabinets in Florida 2026 | interior | Florida
+- PENDING | cost to replace kitchen cabinets in Miami 2026 | interior | Miami
+- PENDING | cost to replace kitchen cabinets in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to replace kitchen cabinets in Tampa 2026 | interior | Tampa
+- PENDING | cost to install granite countertops in Florida 2026 | interior | Florida
+- PENDING | cost to install granite countertops in Miami 2026 | interior | Miami
+- PENDING | cost to install granite countertops in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to install quartz countertops in Florida 2026 | interior | Florida
+- PENDING | cost to install quartz countertops in Miami 2026 | interior | Miami
+- PENDING | cost to install quartz countertops in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to paint interior of house in Florida 2026 | interior | Florida
+- PENDING | cost to paint interior of house in Miami 2026 | interior | Miami
+- PENDING | cost to paint interior of house in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to paint interior of house in Tampa 2026 | interior | Tampa
+- PENDING | cost to remove popcorn ceiling in Florida 2026 | interior | Florida
+- PENDING | cost to remove popcorn ceiling in Miami 2026 | interior | Miami
+- PENDING | cost to remove popcorn ceiling in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to remove popcorn ceiling in Tampa 2026 | interior | Tampa
+- PENDING | cost to repair drywall in Florida 2026 | interior | Florida
+- PENDING | cost to repair drywall in Miami 2026 | interior | Miami
+- PENDING | cost to install custom closet in Florida 2026 | interior | Florida
+- PENDING | cost to install custom closet in Miami 2026 | interior | Miami
+- PENDING | cost to install custom closet in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to convert garage in Florida 2026 | interior | Florida
+- PENDING | cost to convert garage in Miami 2026 | interior | Miami
+- PENDING | cost to convert garage in Fort Lauderdale 2026 | interior | Fort Lauderdale
+- PENDING | cost to repipe house in Florida 2026 | plumbing | Florida
+- PENDING | cost to repipe house in Miami 2026 | plumbing | Miami
+- PENDING | cost to repipe house in Fort Lauderdale 2026 | plumbing | Fort Lauderdale
+- PENDING | cost to repipe house in Tampa 2026 | plumbing | Tampa
+- PENDING | cost to repipe house in Orlando 2026 | plumbing | Orlando
+- PENDING | cost to repair sewer line in Florida 2026 | plumbing | Florida
+- PENDING | cost to repair sewer line in Miami 2026 | plumbing | Miami
+- PENDING | cost to repair sewer line in Fort Lauderdale 2026 | plumbing | Fort Lauderdale
+- PENDING | cost to repair sewer line in Tampa 2026 | plumbing | Tampa
+- PENDING | cost to install water softener in Florida 2026 | plumbing | Florida
+- PENDING | cost to install water softener in Miami 2026 | plumbing | Miami
+- PENDING | cost to install water softener in Fort Lauderdale 2026 | plumbing | Fort Lauderdale
+- PENDING | cost to install sump pump in Florida 2026 | plumbing | Florida
+- PENDING | cost to install sump pump in Miami 2026 | plumbing | Miami
+- PENDING | cost to install sump pump in Fort Lauderdale 2026 | plumbing | Fort Lauderdale
+- PENDING | cost to rewire house in Florida 2026 | electrical | Florida
+- PENDING | cost to rewire house in Miami 2026 | electrical | Miami
+- PENDING | cost to rewire house in Fort Lauderdale 2026 | electrical | Fort Lauderdale
+- PENDING | cost to rewire house in Tampa 2026 | electrical | Tampa
+- PENDING | cost to install recessed lighting in Florida 2026 | electrical | Florida
+- PENDING | cost to install recessed lighting in Miami 2026 | electrical | Miami
+- PENDING | cost to install recessed lighting in Fort Lauderdale 2026 | electrical | Fort Lauderdale
+- PENDING | cost to install EV charger in Florida 2026 | electrical | Florida
+- PENDING | cost to install EV charger in Miami 2026 | electrical | Miami
+- PENDING | cost to install EV charger in Fort Lauderdale 2026 | electrical | Fort Lauderdale
+- PENDING | cost to install EV charger in Tampa 2026 | electrical | Tampa
+- PENDING | cost to install EV charger in Orlando 2026 | electrical | Orlando
+- PENDING | cost to install ceiling fan in Florida 2026 | electrical | Florida
+- PENDING | cost to install ceiling fan in Miami 2026 | electrical | Miami
+- PENDING | cost to install ceiling fan in Fort Lauderdale 2026 | electrical | Fort Lauderdale
+- PENDING | cost to clean air ducts in Florida 2026 | hvac | Florida
+- PENDING | cost to clean air ducts in Miami 2026 | hvac | Miami
+- PENDING | cost to clean air ducts in Fort Lauderdale 2026 | hvac | Fort Lauderdale
+- PENDING | cost to clean air ducts in Tampa 2026 | hvac | Tampa
+- PENDING | cost to replace ductwork in Florida 2026 | hvac | Florida
+- PENDING | cost to replace ductwork in Miami 2026 | hvac | Miami
+- PENDING | cost to replace ductwork in Fort Lauderdale 2026 | hvac | Fort Lauderdale
+- PENDING | cost to install mini split in Florida 2026 | hvac | Florida
+- PENDING | cost to install mini split in Miami 2026 | hvac | Miami
+- PENDING | cost to install mini split in Fort Lauderdale 2026 | hvac | Fort Lauderdale
+- PENDING | cost to install mini split in Tampa 2026 | hvac | Tampa
+- PENDING | cost to install mini split in Orlando 2026 | hvac | Orlando
+- PENDING | cost to replace septic tank in Florida 2026 | major-systems | Florida
+- PENDING | cost to replace septic tank in Miami 2026 | major-systems | Miami
+- PENDING | cost to replace septic tank in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
+- PENDING | cost to replace septic tank in Tampa 2026 | major-systems | Tampa
+- PENDING | cost to replace septic tank in Jacksonville 2026 | major-systems | Jacksonville
+- PENDING | cost to install spray foam insulation in Florida 2026 | major-systems | Florida
+- PENDING | cost to install spray foam insulation in Miami 2026 | major-systems | Miami
+- PENDING | cost to install spray foam insulation in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
+- PENDING | cost to install spray foam insulation in Tampa 2026 | major-systems | Tampa
+- PENDING | cost of mold remediation in Florida 2026 | major-systems | Florida
+- PENDING | cost of mold remediation in Miami 2026 | major-systems | Miami
+- PENDING | cost of mold remediation in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
+- PENDING | cost of mold remediation in Tampa 2026 | major-systems | Tampa
+- PENDING | cost of mold remediation in Orlando 2026 | major-systems | Orlando
+- PENDING | cost of termite treatment in Florida 2026 | major-systems | Florida
+- PENDING | cost of termite treatment in Miami 2026 | major-systems | Miami
+- PENDING | cost of termite treatment in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
+- PENDING | cost of termite treatment in Tampa 2026 | major-systems | Tampa
+- PENDING | cost of termite treatment in Orlando 2026 | major-systems | Orlando
+- PENDING | cost to repair foundation in Florida 2026 | major-systems | Florida
+- PENDING | cost to repair foundation in Miami 2026 | major-systems | Miami
+- PENDING | cost to repair foundation in Fort Lauderdale 2026 | major-systems | Fort Lauderdale
+- PENDING | cost to repair foundation in Tampa 2026 | major-systems | Tampa
+- PENDING | cost to replace well pump in Florida 2026 | major-systems | Florida
+- PENDING | cost to replace well pump in Tampa 2026 | major-systems | Tampa
+- PENDING | cost to replace well pump in Jacksonville 2026 | major-systems | Jacksonville
+- PENDING | cost to replace well pump in Orlando 2026 | major-systems | Orlando
+- PENDING | cost to build inground pool in Florida 2026 | pool | Florida
+- PENDING | cost to build inground pool in Miami 2026 | pool | Miami
+- PENDING | cost to build inground pool in Fort Lauderdale 2026 | pool | Fort Lauderdale
+- PENDING | cost to build inground pool in Tampa 2026 | pool | Tampa
+- PENDING | cost to build inground pool in Orlando 2026 | pool | Orlando
+- PENDING | cost to replace pool pump in Florida 2026 | pool | Florida
+- PENDING | cost to replace pool pump in Miami 2026 | pool | Miami
+- PENDING | cost to replace pool pump in Fort Lauderdale 2026 | pool | Fort Lauderdale
+- PENDING | cost to install pool heater in Florida 2026 | pool | Florida
+- PENDING | cost to install pool heater in Miami 2026 | pool | Miami
+- PENDING | cost to install pool heater in Fort Lauderdale 2026 | pool | Fort Lauderdale
+- PENDING | cost to build pool enclosure in Florida 2026 | pool | Florida
+- PENDING | cost to build pool enclosure in Miami 2026 | pool | Miami
+- PENDING | cost to build pool enclosure in Fort Lauderdale 2026 | pool | Fort Lauderdale
+- PENDING | cost to build pool enclosure in Tampa 2026 | pool | Tampa
+- PENDING | cost to resurface pool deck in Florida 2026 | pool | Florida
+- PENDING | cost to resurface pool deck in Miami 2026 | pool | Miami
+- PENDING | cost to resurface pool deck in Fort Lauderdale 2026 | pool | Fort Lauderdale
+- PENDING | cost to resurface pool deck in Tampa 2026 | pool | Tampa
+- PENDING | cost to install gutter in Florida 2026 | exterior | Florida
+- PENDING | cost to install gutter in Miami 2026 | exterior | Miami
+- PENDING | cost to install gutter in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PENDING | cost to install gutter in Tampa 2026 | exterior | Tampa
+- PENDING | cost to repair stucco in Florida 2026 | exterior | Florida
+- PENDING | cost to repair stucco in Miami 2026 | exterior | Miami
+- PENDING | cost to repair stucco in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PENDING | cost to repair stucco in Tampa 2026 | exterior | Tampa
+- PENDING | cost to repair soffit and fascia in Florida 2026 | exterior | Florida
+- PENDING | cost to repair soffit and fascia in Miami 2026 | exterior | Miami
+- PENDING | cost to repair soffit and fascia in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PENDING | cost to repair seawall in Florida 2026 | exterior | Florida
+- PENDING | cost to repair seawall in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PENDING | cost to repair seawall in Miami 2026 | exterior | Miami
+- PENDING | cost to repair seawall in Tampa 2026 | exterior | Tampa
+- PENDING | cost to install landscape lighting in Florida 2026 | exterior | Florida
+- PENDING | cost to install landscape lighting in Miami 2026 | exterior | Miami
+- PENDING | cost to install landscape lighting in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PENDING | cost to build patio in Florida 2026 | exterior | Florida
+- PENDING | cost to build patio in Miami 2026 | exterior | Miami
+- PENDING | cost to build patio in Fort Lauderdale 2026 | exterior | Fort Lauderdale
+- PENDING | cost to build patio in Tampa 2026 | exterior | Tampa
+- PENDING | cost to replace roof in St. Petersburg 2026 | roofing | St. Petersburg
+- PENDING | cost to replace AC in St. Petersburg 2026 | hvac | St. Petersburg
+- PENDING | cost to install impact windows in St. Petersburg 2026 | hurricane-protection | St. Petersburg
+- PENDING | cost to remodel kitchen in St. Petersburg 2026 | interior | St. Petersburg
+- PENDING | cost to build inground pool in St. Petersburg 2026 | pool | St. Petersburg
+- PENDING | cost to replace roof in Coral Gables 2026 | roofing | Coral Gables
+- PENDING | cost to install impact windows in Coral Gables 2026 | hurricane-protection | Coral Gables
+- PENDING | cost to remodel kitchen in Coral Gables 2026 | interior | Coral Gables
+- PENDING | cost to replace AC in Coral Gables 2026 | hvac | Coral Gables
+- PENDING | cost to replace roof in Pembroke Pines 2026 | roofing | Pembroke Pines
+- PENDING | cost to install impact windows in Pembroke Pines 2026 | hurricane-protection | Pembroke Pines
+- PENDING | cost to replace AC in Pembroke Pines 2026 | hvac | Pembroke Pines
+- PENDING | cost to remodel kitchen in Pembroke Pines 2026 | interior | Pembroke Pines
+- PENDING | cost to replace roof in Weston 2026 | roofing | Weston
+- PENDING | cost to install impact windows in Weston 2026 | hurricane-protection | Weston
+- PENDING | cost to replace AC in Weston 2026 | hvac | Weston
+- PENDING | cost to replace roof in Davie 2026 | roofing | Davie
+- PENDING | cost to install impact windows in Davie 2026 | hurricane-protection | Davie
+- PENDING | cost to replace roof in Plantation 2026 | roofing | Plantation
+- PENDING | cost to install impact windows in Plantation 2026 | hurricane-protection | Plantation
+- PENDING | cost to replace roof in Deerfield Beach 2026 | roofing | Deerfield Beach
+- PENDING | cost to install impact windows in Deerfield Beach 2026 | hurricane-protection | Deerfield Beach
+- PENDING | cost to replace roof in Coconut Creek 2026 | roofing | Coconut Creek
+- PENDING | cost to replace roof in Sunrise 2026 | roofing | Sunrise
+- PENDING | cost to replace roof in Margate 2026 | roofing | Margate
+- PENDING | cost to replace roof in Tamarac 2026 | roofing | Tamarac
+- PENDING | cost to replace roof in Parkland 2026 | roofing | Parkland
+- PENDING | cost to replace roof in Cooper City 2026 | roofing | Cooper City
+- PENDING | cost to replace roof in Homestead 2026 | roofing | Homestead
+- PENDING | cost to install impact windows in Homestead 2026 | hurricane-protection | Homestead
+- PENDING | cost to replace roof in Key West 2026 | roofing | Key West
+- PENDING | cost to install hurricane shutters in Key West 2026 | hurricane-protection | Key West
 ## Published
 
 | Date | Keyword | File | Notes |
